@@ -1,12 +1,25 @@
 <table>
     <tr>
         <img class="door_image" src="../../assets/door.jpg">
-        <button  color="primary" outline="true" size="sm" type="button" class="btn btn-outline">Login</button>
+        <button id="login1" color="primary" outline="true" size="sm" type="button" class="btn btn-outline m-0" (click)="loginCount(this.login1,'login1')">Login</button>
         <img class="door_image" src="../../assets/door.jpg">
-        <button mat-raised-button color="primary" outline="true" size="sm" type="button" class="m-0">Login</button>
+        <button id="login2" color="primary" outline="true" size="sm" type="button" class="m-0" (click)="loginCount(this.login2,'login2')">Login</button>
         <img class="door_image" src="../../assets/door.jpg">
-        <button mat-raised-button color="primary" outline="true" size="sm" type="button" class="m-0">Login</button>
+        <button id="login3" color="primary" outline="true" size="sm" type="button" class="m-0" (click)="loginCount(this.login3,'login3')">Login</button>
     </tr>
 </table>
+<div id = "loginFields">
+    <div class = "foo">
+        <label for="userField"><b>Username:</b></label>
+        <input type="text" id = "userField" name = "userField" placeholder="Insert Username">
+    </div>
+    <div class = "foo">
+        <label for="passField"><b>Password: </b></label>
+        <input type="password" id = "passField" name = "passField">
+    </div>
+</div>
+<div id = "messages"></div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<img class="lock_image" src="../../assets/Lockey.png" (click)="submit()">
 
 

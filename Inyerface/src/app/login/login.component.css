@@ -1,5 +1,50 @@
 .door_image{
-    width: 30%;
-    height:30%;
-
+    width: 31%;
+    height:31%;
 }
+
+.lock_image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table{
+    padding-left: 40px;
+}
+
+.m-0{
+    z-index: 2;
+    transform: translate(-100%, 700%);
+    position: absolute;
+    padding: 10px 70px;
+}
+
+.foo{
+    width: 90%;
+    margin: auto;
+}
+
+#messages{
+    text-align: center;
+}
+
+#loginFields{
+    background-color: rgba(150,95,14,.8);
+    color : white;
+    width: 20%;
+    font-size: 15px;
+    margin: auto;
+    z-index: 2;
+    transform: translate(-10%, -320%);
+    border-style: inset;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 5px 5px 5px rgb(94, 46, 7) inset;
+}
+#userField, #passField{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+

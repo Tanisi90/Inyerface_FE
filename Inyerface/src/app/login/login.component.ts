@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       mess.innerText = "You did it!!";
     }
     else{
-      mess.innerText = "You done goofed.";
+      this.toggleModal();
     }
   }
 
@@ -51,6 +51,11 @@ export class LoginComponent implements OnInit {
           console.log("?????????? HOw did you get here.");
       }
     }
+  }
+
+  toggleModal(){
+    var modal = document.getElementById("diabolicalmodal");
+    modal.hidden = !modal.hidden;
   }
 
 }

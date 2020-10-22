@@ -1,4 +1,48 @@
 body{
-    background:radial-gradient(rgba(252,22,58,1) 2%, rgba(218,22,150,1) 20%, rgba(14,232,20,1) 43%, rgba(29,64,253,1) 69%, rgba(176,69,252,1) 90%);
+    background:radial-gradient(rgba(237,44,11,1) 0%, rgba(255,23,220,1) 19%, rgba(14,250,29,1) 44%, rgba(11,56,238,1) 72%, rgba(175,0,255,1) 100%);
     color: black;
 }
+
+#box{
+   background-color: aqua;
+   margin: auto;
+   margin-top: 10%;
+   width: 35%;
+}
+
+table{
+    table-layout: fixed;
+    width: 80%;
+    margin: auto;
+
+}
+
+/* Takes away up/down arrows for number box */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.numberbox{
+    pointer-events: none;
+}
+
+#generate{
+    background-color: none;
+    border-color: greenyellow;
+    color:black;
+}
+
+.submitButton{
+    background-color: none;
+    border-radius: green;
+    color: green;
+}
+
+.rngbutton{
+    background-color: red;
+    color: black;
+}
+
+

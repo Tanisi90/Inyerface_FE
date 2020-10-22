@@ -1,28 +1,127 @@
+<div style="text-align: center;" id="box">
+    <p><b> Please enter your desired Username </b></p>
+    <input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
+    <br>
+    <p><b> Please enter your desired Password </b></p>
+    <input type="text" id="password" placeholder="Password"> <br>
+    <input type="text" id="confirmpassword" placeholder="Password Confirmation">
+    <p><b>
+            1) Must include 3 random symbols through out password that are not consecutive. <br>
+            2) Must include a number from your phone number. <br>
+            3) Must include minimal of 1 capital letter.<br>
+            4) The name of a color must be included in the password.
+        </b>
+    </p>
+    <label for="securityQ"><b>Please Choose your security Question:</b></label>
+    <select id="securityQ" name="securityQ">
+        <option *ngFor="let response of securityQ" [value]="response.value"> {{response.value}} </option>
+    </select>
 
-<input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
-<br><br><br>
-<input type="text" id="password" placeholder="Password"> <br>
-<input type="text" id="confirmpassword" placeholder="Password Confirmation">
-<p><b> 
-    1) Must include 3 random symbols through out password that are not consecutive. <br>
-    2) Must include a number from your phone number. <br>
-    3) Must include minimal of 1 capital letter.<br>
-    4) The name of a color must be included in the password.
-</b>
-</p>
-<label for="securityQ">Please Choose your security Question:</label>
-<select id="securityQ" name="securityQ" >
-       <option *ngFor = "let response of securityQ" [value] = "response.value"> {{response.value}} </option>
-</select>
 
-<p><b> Please Enter a valid E-mail</b></p>
-<input type="text" id="email" placeholder="Email@yahoo.com">
-<p><b> Please choose your favorite color :) </b></p>
-<input type="color" id= "color">
-<br><br><br>
+    <p><b> Please Enter a valid E-mail</b></p>
+    <input type="text" id="email" placeholder="Email">
+    <select id="symbol" name="symbol">
+        <option *ngFor="let type of symbol" [value]="type.value"> {{type.value}} </option>
+    </select>
+    <select id="website" name="website">
+        <option *ngFor="let site of website" [value]="site.value"> {{site.value}} </option>
+    </select>
+    <select id="domain" name="domain">
+        <option *ngFor="let res of domain" [value]="res.value"> {{res.value}} </option>
+    </select>
 
-<button id="reg1" color="primary" outline="true" size="sm" type="button" class="btn btn-outline m-0" (click)="correctReg()" style ="float: right"> Register </button>
-<button id="reg2" color="primary" outline="true" size="sm" type="button" class="btn btn-outline m-0" (click)="incorrectReg()"> Register </button>
+    <p><b> Please choose your favorite color :) </b></p>
+    <input type="color" id="color">
+    <br>
+
+    <div id="phoneboxes">
+        <p><b> Please enter your phone number. </b></p>
+        <table>
+            <tr >
+                <td>
+                    <input class = "numberbox" type="number" id="numbers" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers1" min="0" max="9"/>
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers2" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers3" min="0" max="9"  />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers4" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox"  type="number" id="numbers5" min="0" max="9"  />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers6" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers7" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers8" min="0" max="9" />
+                </td>
+                <td>
+                    <input class = "numberbox" type="number" id="numbers9" min="0" max="9" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers1').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers2').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers3').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers4').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers5').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers6').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers7').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers8').value);"> H
+                    </button>
+                </td>
+                <td>
+                    <button class = "rngbutton" onclick="getRandomNumber(document.getElementById('numbers9').value);"> H
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <button id="generate" outline="true" size="sm" type="button"
+        (click)="getRandomNumber()" style="float: center"> Generate </button>
+
+    </div>
+
+    <button outline="true" size="sm" type="button" class="btn btn-outline submitButton"
+        (click)="correctReg()" style="float: right"> Register </button>
+    <button outline="true" size="sm" type="button" class="btn btn-outline submitButton "
+        (click)="incorrectReg()" style="float: left"> Register </button>
 
 
 

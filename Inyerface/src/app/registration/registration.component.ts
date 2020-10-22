@@ -8,9 +8,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  lastLeng:number = 0;
-  shiftBy:number = 3;
-  securityQ:string;
+  lastLeng: number = 0;
+  shiftBy: number = 3;
+  securityQ: string[];
+  symbol: string[];
+  domain: string[];
+  website: string[];
+
+
 
   constructor() { }
 
@@ -53,4 +58,15 @@ export class RegistrationComponent implements OnInit {
     this.lastLeng = old.length;
   }
 
+  correctReg(){
+
+  }
+
+  incorrectReg(){
+
+  }
+
+  getRandomNumber(){
+
+  }
 }

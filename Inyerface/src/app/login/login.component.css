@@ -1,6 +1,7 @@
 .door_image{
     width: 31%;
     height:31%;
+
 }
 
 .lock_image{
@@ -18,6 +19,7 @@ table{
     transform: translate(-100%, 700%);
     position: absolute;
     padding: 10px 70px;
+
 }
 
 .foo{
@@ -27,6 +29,7 @@ table{
 
 #messages{
     text-align: center;
+
 }
 
 #loginFields{
@@ -41,10 +44,14 @@ table{
     border-radius: 5px;
     border-color: black;
     box-shadow: 5px 5px 5px rgb(94, 46, 7) inset;
+    
 }
 #userField, #passField{
     font-size: 15px;
     margin-bottom: 5px;
+    
+
+
 }
 
 /* The Modal (background) */
@@ -58,6 +65,7 @@ table{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
   }
   
 /* Modal Content/Box */
@@ -67,6 +75,7 @@ table{
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+
 }
 
 #go {

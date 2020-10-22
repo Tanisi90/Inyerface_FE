@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.login3++;
           break;
         default:
-          console.log("?????????? HOw did you get here.");
+          console.log("?????????? How did you get here.");
       }
     }
   }

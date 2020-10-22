@@ -1,0 +1,29 @@
+
+<input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
+<br><br><br>
+<input type="text" id="password" placeholder="Password"> <br>
+<input type="text" id="confirmpassword" placeholder="Password Confirmation">
+<p><b> 
+    1) Must include 3 random symbols through out password that are not consecutive. <br>
+    2) Must include a number from your phone number. <br>
+    3) Must include minimal of 1 capital letter.<br>
+    4) The name of a color must be included in the password.
+</b>
+</p>
+<label for="securityQ">Please Choose your security Question:</label>
+<select id="securityQ" name="securityQ" >
+       <option *ngFor = "let response of securityQ" [value] = "response.value"> {{response.value}} </option>
+</select>
+
+<p><b> Please Enter a valid E-mail</b></p>
+<input type="text" id="email" placeholder="Email@yahoo.com">
+<p><b> Please choose your favorite color :) </b></p>
+<input type="color" id= "color">
+<br><br><br>
+
+<button id="reg1" color="primary" outline="true" size="sm" type="button" class="btn btn-outline m-0" (click)="correctReg()" style ="float: right"> Register </button>
+<button id="reg2" color="primary" outline="true" size="sm" type="button" class="btn btn-outline m-0" (click)="incorrectReg()"> Register </button>
+
+
+
+

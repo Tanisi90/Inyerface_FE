@@ -53,4 +53,12 @@ export class RegistrationComponent implements OnInit {
     this.lastLeng = old.length;
   }
 
+  correctReg(){
+
+  }
+
+  incorrectReg(){
+    
+  }
+
 }

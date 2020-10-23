@@ -3,13 +3,14 @@
     <input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
     <br>
     <p><b> Please enter your desired Password </b></p>
-    <input type="text" id="password" placeholder="Password"> <br>
-    <input type="text" id="confirmpassword" placeholder="Password Confirmation">
+    <input type="password" (focusout)="checkRules()" id="password" placeholder="Password"> <br>
+    <input type="password" (focusout)="matchPass()" id="confirmpassword" placeholder="Password Confirmation">
+    <div id="passMess"></div>
     <p><b>
             1) Must include 3 random symbols through out password that are not consecutive. <br>
             2) Must include a number from your phone number. <br>
             3) Must include minimal of 1 capital letter.<br>
-            4) The name of a color must be included in the password.
+            4) The name of a selectable color must be included in the password.
         </b>
     </p>
     <label for="securityQ"><b>Please Choose your security Question:</b></label>
@@ -21,13 +22,13 @@
     <p><b> Please Enter a valid E-mail</b></p>
     <input type="text" id="email" placeholder="Email">
     <select id="symbol" name="symbol">
-        <option *ngFor="let type of symbol" [value]="type.value"> {{type.value}} </option>
+        <option *ngFor="let type of symbol" [value]="type">{{type}}</option>
     </select>
     <select id="website" name="website">
-        <option *ngFor="let site of website" [value]="site.value"> {{site.value}} </option>
+        <option *ngFor="let site of website" [value]="site"> {{site}} </option>
     </select>
     <select id="domain" name="domain">
-        <option *ngFor="let res of domain" [value]="res.value"> {{res.value}} </option>
+        <option *ngFor="let res of domain" [value]="res"> {{res}} </option>
     </select>
 
     <p><b> Please choose your favorite color :) </b></p>

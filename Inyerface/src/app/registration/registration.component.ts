@@ -66,7 +66,14 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  getRandomNumber(){
+  lockNum(toLock:string){
+    document.getElementById(toLock).classList.toggle("open");
+  }
 
+  getRandomNumber(){
+    var digits = document.getElementsByClassName("open");
+    for(var i = 0; i < digits.length; i++){
+      (<HTMLInputElement>digits.item(i)).value = Math.floor(Math.random()*9).toString();
+    }
   }
 }

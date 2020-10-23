@@ -4,7 +4,7 @@
     object-fit: cover;
 }
 .col{
-    width: 30%;
+    width: 33%;
     float:left;
     position: relative;
 }
@@ -47,11 +47,11 @@ table{
     background-color: rgba(150,95,14,.8);
     color : white;
     width: 17%;
-    font-size: 15px;
+    font-size: 100%;
     margin: auto;
     z-index: 1;
     top:30%;
-    left:38%;
+    left:42%;
     border-style: inset;
     border-radius: 5px;
     border-color: black;
@@ -59,8 +59,8 @@ table{
     
 }
 #userField, #passField{
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: 100%;
+    margin-bottom: 1%;
     width:85%;
 }
 

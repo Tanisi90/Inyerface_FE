@@ -29,15 +29,17 @@ input::-webkit-inner-spin-button {
 }
 
 #generate{
-    background-color: none;
+    background-color: black;
     border-color: greenyellow;
-    color:black;
+    color:whitesmoke;
 }
 
-.submitButton{
-    background-color: none;
+.btn{
+    background-color: black;
     border-radius: green;
     color: green;
+    width: 15%;
+    height: 15%;
 }
 
 .rngbutton{

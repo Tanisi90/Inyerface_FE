@@ -47,4 +47,51 @@ input::-webkit-inner-spin-button {
     color: black;
 }
 
+.dropdown-menu>.active>a:hover {
+    background-color:transparent;
+}
+  #color-1 {
+    background-color: rgb(198, 17, 17);
+  }
+  
+  #color-2 {
+    background-color: rgb(240, 125, 13);
+  }
+  
+  #color-3 {
+    background-color: rgb(246, 246, 87);
+  }
+  
+  #color-4 {
+    background-color: rgb(17, 128, 45);
+  }
 
+  #color-5 {
+    background-color: rgb(80, 240, 57);
+  }
+
+  #color-6 {
+    background-color: rgb(56, 255, 221);
+  }
+
+  #color-7 {
+    background-color: rgb(19, 46, 210);
+  }
+
+  #color-8 {
+    background-color: rgb(238, 84, 187);
+  }
+
+  #color-9 {
+    background-color: rgb(107, 47, 188);
+  }
+
+  #color-10 {
+    background-color: rgb(215, 225, 241);
+  }
+  #color-11 {
+    background-color: rgb(133, 73, 30);
+  }
+  #color-12 {
+    background-color: rgb(63, 71, 78);
+  }

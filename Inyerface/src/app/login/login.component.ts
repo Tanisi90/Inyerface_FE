@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   login2:number = 1;
   login3:number = 1;
 
-  constructor() { }
+  constructor(private userServ:UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -21,12 +23,12 @@ export class LoginComponent implements OnInit {
     var password = (<HTMLInputElement>document.getElementById("passField")).value;
     var mess = document.getElementById("messages");
 
-    if(username == "oogey" && password == "boogey"){
-      mess.innerText = "You did it!!";
-    }
-    else{
-      this.toggleModal();
-    }
+      this.userServ.login(username,password).subscribe(
+        (response:any)=>{
+          this.router.navigateByUrl('/profile');
+        }
+      );
+    this.toggleModal();
   }
 
   loginCount(lock:number,lockId:string){

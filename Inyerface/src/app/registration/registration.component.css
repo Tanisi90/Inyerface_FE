@@ -52,48 +52,66 @@ input::-webkit-inner-spin-button {
     color: black;
 }
 
-  #color-1 {
-    background-color: rgb(198, 17, 17);
-  }
+ul {
+  display: inline-block;
+}
+
+#color-1 {
+  background-color: rgb(198, 17, 17);
+  width: 100%;
+}
   
-  #color-2 {
-    background-color: rgb(240, 125, 13);
-  }
+#color-2 {
+  background-color: rgb(240, 125, 13);
+  width: 100%;
+}
   
-  #color-3 {
-    background-color: rgb(246, 246, 87);
-  }
+#color-3 {
+  background-color: rgb(246, 246, 87);
+  width: 100%;
+}
   
-  #color-4 {
-    background-color: rgb(17, 128, 45);
-  }
+#color-4 {
+  background-color: rgb(17, 128, 45);
+  width: 100%;
+}
 
-  #color-5 {
-    background-color: rgb(80, 240, 57);
-  }
+#color-5 {
+  background-color: rgb(80, 240, 57);
+  width: 100%;
+}
 
-  #color-6 {
-    background-color: rgb(56, 255, 221);
-  }
+#color-6 {
+  background-color: rgb(56, 255, 221);
+  width: 100%;
+}
 
-  #color-7 {
-    background-color: rgb(19, 46, 210);
-  }
+#color-7 {
+  background-color: rgb(19, 46, 210);
+  width: 100%;
+}
 
-  #color-8 {
-    background-color: rgb(238, 84, 187);
-  }
+#color-8 {
+  background-color: rgb(238, 84, 187);
+  width: 100%;
+}
 
-  #color-9 {
-    background-color: rgb(107, 47, 188);
-  }
+#color-9 {
+  background-color: rgb(107, 47, 188);
+  width: 100%;
+}
 
-  #color-10 {
-    background-color: rgb(215, 225, 241);
-  }
-  #color-11 {
-    background-color: rgb(133, 73, 30);
-  }
-  #color-12 {
-    background-color: rgb(63, 71, 78);
-  }
+#color-10 {
+  background-color: rgb(215, 225, 241);
+  width: 100%;
+}
+
+#color-11 {
+  background-color: rgb(133, 73, 30);
+  width: 100%;
+}
+
+#color-12 {
+  background-color: rgb(63, 71, 78);
+  width: 100%;
+}

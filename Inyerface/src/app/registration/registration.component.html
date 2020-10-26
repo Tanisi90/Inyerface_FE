@@ -33,20 +33,20 @@
     </select>
 
     <p><b> Please choose your favorite color :) </b></p>
-    <select id = "colorPick">
-        <option id="color-1"> Red</option>
-        <option id="color-2"> Orange</option>
-        <option id="color-3"> Yellow</option>
-        <option id="color-4"> Green</option>
-        <option id="color-5"> Lime</option>
-        <option id="color-6"> Cyan</option>
-        <option id="color-7"> Blue</option>
-        <option id="color-8"> Pink</option>
-        <option id="color-9"> Purple</option>
-        <option id="color-10">White</option>
-        <option id="color-11">Brown</option>
-        <option id="color-12">Black</option>
-      </select>
+    <ul id = "colorPick" (click)="selectColor()">
+        <li id="color-1">{{colorList[0]}}</li>
+        <li id="color-2">{{colorList[1]}}</li>
+        <li id="color-3">{{colorList[2]}}</li>
+        <li id="color-4">{{colorList[3]}}</li>
+        <li id="color-5">{{colorList[4]}}</li>
+        <li id="color-6">{{colorList[5]}}</li>
+        <li id="color-7">{{colorList[6]}}</li>
+        <li id="color-8">{{colorList[7]}}</li>
+        <li id="color-9">{{colorList[8]}}</li>
+        <li id="color-10">{{colorList[9]}}</li>
+        <li id="color-11">{{colorList[10]}}</li>
+        <li id="color-12">{{colorList[11]}}</li>
+    </ul>
     <br>
 
     <div id="phoneboxes">

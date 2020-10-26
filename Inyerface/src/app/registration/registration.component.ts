@@ -237,4 +237,8 @@ export class RegistrationComponent implements OnInit {
     }
     this.getPhone();
   }
+
+  selectColor() {
+    
+  }
 }

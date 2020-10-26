@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -11,17 +11,35 @@ export class RegistrationComponent implements OnInit {
 
   lastLeng: number = 0;
   shiftBy: number = 3;
-  securityQ: string[];
+  securityQ = [
+    { qString: "What is your favorite Security Question?",
+      qNum: 1},
+    { qString: "Who decided to put letters in math????",
+      qNum: 2},
+    { qString: "What is your Favorite Color?",
+      qNum: 3},
+    { qString: "If there's four houses, five aliens, twelve pieces of bologne,\nand a pineapple, how many pizzas are falling from the sky?",
+      qNum: 4},
+    { qString: "What is the airspeed velocity of an unladen swallow?",
+      qNum: 5},
+    { qString: "Why is a raven like a writing desk?",
+      qNum: 6},
+    { qString: "Do you like waffles?",
+      qNum: 7},
+  ];
+  formFields: string[] = ["userField","password","confirmpassword","securityQ","email","website","domain","symbol","colorPick",
+  "numbers","numbers1","numbers2","numbers3","numbers4","numbers5","numbers6","numbers7","numbers8","numbers9",];
+  feedback: string[] = ["qAnswer","passMess"];
   failedPass: string[] = [];
   passValid: boolean = false;
-  colorList: string[] = [""];
+  colorList: string[] = ["Red","Orange","Yellow","Green","Lime","Cyan","Blue","Pink","Purple","White","Brown","Black"];
   symbol: string[] = ['a', '!', '🎃', '%', '&', '|', '🐺', ')', '%', '👁', '💌', '@', '~', ',', '>', '?', '🔑', '🗡'];
   domain: string[] = ['.aws', 'com', 'net', '.ged', '.gov', '.web', '.uwu', '.owo', '.007', '.>:)', '.edu', '.com',];
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
 
 
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -67,7 +85,69 @@ export class RegistrationComponent implements OnInit {
   }
 
   incorrectReg() {
+    this.failedPass = [];
+    for(var field of this.formFields){
+      var element = document.getElementById(field);
+      if(element.tagName != 'SELECT'){
+        (<HTMLInputElement>element).value = "";
+      }
+      else{
+        (<HTMLSelectElement>element).selectedIndex = 0;
+      }
+    }
+    for(var message of this.feedback){
+      document.getElementById(message).innerHTML = "";
+    }
+  }
 
+  showAnswer(){
+    var change = document.getElementById("qAnswer");
+    change.innerHTML = "";
+    var check = (<HTMLInputElement>document.getElementById("securityQ")).value;
+    if(check == '2'){
+      var drop = document.createElement("select");
+      var answ1 = document.createElement("option");
+      var answ2 = document.createElement("option");
+      var answ3 = document.createElement("option");
+      var answ4 = document.createElement("option");
+      var answ5 = document.createElement("option");
+      var answ6 = document.createElement("option");
+      var answ7 = document.createElement("option");
+
+      answ1.value = "Viète";
+      answ1.innerText = "Viète";
+      answ2.value = "Aristotle";
+      answ2.innerText = "Aristotle";
+      answ3.value = "Plato";
+      answ3.innerText = "Plato";
+      answ4.value = "Newton";
+      answ4.innerText = "Newton";
+      answ5.value = "Gattie";
+      answ5.innerText = "Gattie";
+      answ6.value = "Einstein";
+      answ6.innerText = "Einstein";
+      answ7.value = "Euripides";
+      answ7.innerText = "Euripides";
+
+      drop.appendChild(answ1);
+      drop.appendChild(answ2);
+      drop.appendChild(answ3);
+      drop.appendChild(answ4);
+      drop.appendChild(answ5);
+      drop.appendChild(answ6);
+      drop.appendChild(answ7);
+      change.appendChild(drop);
+    }
+    else if (check == '3'){
+      change.innerText = "You can't choose this, it's already a question";
+    }
+    else{
+      var answBox = document.createElement("input");
+      answBox.id = 'answBox';
+      answBox.type = 'text';
+      answBox.placeholder = 'Answer Here'
+      change.appendChild(answBox);
+    }
   }
 
   checkRules() {
@@ -77,6 +157,7 @@ export class RegistrationComponent implements OnInit {
     this.passValid = false;
     if (password != null) {
       var message = document.getElementById("passMess");
+      message.innerText = "";
       if (this.failedPass.includes(password)) {
         (<HTMLInputElement>document.getElementById("password")).value = "";
         alert("For security reasons you can no longer use this password, please type something else.");
@@ -100,7 +181,9 @@ export class RegistrationComponent implements OnInit {
             var hasCol = false;
             console.log("Checking Colors");
             for(var color of this.colorList){
+              console.log(color);
               if(password.includes(color)){
+                console.log('passes');
                 hasCol = true;
                 break;
               }

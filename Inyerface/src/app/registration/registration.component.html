@@ -14,9 +14,10 @@
         </b>
     </p>
     <label for="securityQ"><b>Please Choose your security Question:</b></label>
-    <select id="securityQ" name="securityQ">
-        <option *ngFor="let response of securityQ" [value]="response.value"> {{response.value}} </option>
+    <select id="securityQ" name="securityQ" (input)="showAnswer()">
+        <option *ngFor="let response of securityQ" [value]="response.qNum"> {{response.qString}} </option>
     </select>
+    <div id = "qAnswer"></div>
 
 
     <p><b> Please Enter a valid E-mail</b></p>
@@ -32,7 +33,7 @@
     </select>
 
     <p><b> Please choose your favorite color :) </b></p>
-    <select>
+    <select id = "colorPick">
         <option id="color-1"> Red</option>
         <option id="color-2"> Orange</option>
         <option id="color-3"> Yellow</option>

@@ -17,6 +17,10 @@ table{
 
 }
 
+#securityQ{
+    width: 80%;
+}
+
 
 /* Takes away up/down arrows for number box */
 input::-webkit-outer-spin-button,
@@ -48,9 +52,6 @@ input::-webkit-inner-spin-button {
     color: black;
 }
 
-.dropdown-menu>.active>a:hover {
-    background-color:transparent;
-}
   #color-1 {
     background-color: rgb(198, 17, 17);
   }

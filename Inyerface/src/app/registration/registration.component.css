@@ -196,3 +196,8 @@ ul {
   width: 80%; /* Could be more or less, depending on screen size */
 
 }
+
+.au {
+  height: 125px;
+  width: 100px;
+}

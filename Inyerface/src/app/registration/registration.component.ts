@@ -32,12 +32,13 @@ export class RegistrationComponent implements OnInit {
   feedback: string[] = ["qAnswer","passMess"];
   failedPass: string[] = [];
   passValid: boolean = false;
-  colorList: string[] = ["Red","Orange","Yellow","Green","Lime","Cyan","Blue","Pink","Purple","White","Brown","Black"];
+  colorList: string[] = ["red","orange","yellow","green","lime","cyan","blue","pink","purple","white","brown","black"];
   symbol: string[] = ['a', '!', '🎃', '%', '&', '|', '🐺', ')', '%', '👁', '💌', '@', '~', ',', '>', '?', '🔑', '🗡'];
   domain: string[] = ['.aws', 'com', 'net', '.ged', '.gov', '.web', '.uwu', '.owo', '.007', '.>:)', '.edu', '.com',];
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
-
-
+  colorSelected: string;
+  imgFileName: string;
+  imposter: string;
 
   constructor(private router:Router) { }
 
@@ -238,12 +239,30 @@ export class RegistrationComponent implements OnInit {
     this.getPhone();
   }
 
-  selectColor() {
+  selectColor(color: string) {
+    this.colorSelected = color;
+    this.imgFileName = "../../assets/TheBois/"+color+"Boi.png";
     this.toggleModal();
+    this.setImposter();
   }
 
   toggleModal(){
     var modal = document.getElementById("amongusmodal");
     modal.hidden = !modal.hidden;
+  }
+
+  setImposter(){
+    var rando = Math.floor(Math.random() * 12);
+    for (var i=0; i<12; i++){
+      if (i==rando){
+        this.imposter=this.colorList[i]+"boi";
+      }
+    }
+  }
+
+  imposterOrNah(chosen: string){
+    if (chosen = this.imposter) {
+      this.toggleModal();
+    }
   }
 }

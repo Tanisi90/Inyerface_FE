@@ -34,18 +34,18 @@
 
     <p><b> Please choose your favorite color :) </b></p>
     <ul id = "colorPick">
-        <li id="color-1" (click)="selectColor()">{{colorList[0]}}</li>
-        <li id="color-2" (click)="selectColor()">{{colorList[1]}}</li>
-        <li id="color-3" (click)="selectColor()">{{colorList[2]}}</li>
-        <li id="color-4" (click)="selectColor()">{{colorList[3]}}</li>
-        <li id="color-5" (click)="selectColor()">{{colorList[4]}}</li>
-        <li id="color-6" (click)="selectColor()">{{colorList[5]}}</li>
-        <li id="color-7" (click)="selectColor()">{{colorList[6]}}</li>
-        <li id="color-8" (click)="selectColor()">{{colorList[7]}}</li>
-        <li id="color-9" (click)="selectColor()">{{colorList[8]}}</li>
-        <li id="color-10" (click)="selectColor()">{{colorList[9]}}</li>
-        <li id="color-11" (click)="selectColor()">{{colorList[10]}}</li>
-        <li id="color-12" (click)="selectColor()">{{colorList[11]}}</li>
+        <li id="color-1" name="color" (click)="selectColor('Red')">{{colorList[0]}}</li>
+        <li id="color-2" name="color" (click)="selectColor('Orange')">{{colorList[1]}}</li>
+        <li id="color-3" name="color" (click)="selectColor('Yellow')">{{colorList[2]}}</li>
+        <li id="color-4" name="color" (click)="selectColor('Green')">{{colorList[3]}}</li>
+        <li id="color-5" name="color" (click)="selectColor('Lime')">{{colorList[4]}}</li>
+        <li id="color-6" name="color" (click)="selectColor('Cyan')">{{colorList[5]}}</li>
+        <li id="color-7" name="color" (click)="selectColor('Blue')">{{colorList[6]}}</li>
+        <li id="color-8" name="color" (click)="selectColor('Pink')">{{colorList[7]}}</li>
+        <li id="color-9" name="color" (click)="selectColor('Purple')">{{colorList[8]}}</li>
+        <li id="color-10" name="color" (click)="selectColor('White')">{{colorList[9]}}</li>
+        <li id="color-11" name="color" (click)="selectColor('Brown')">{{colorList[10]}}</li>
+        <li id="color-12" name="color" (click)="selectColor('Black')">{{colorList[11]}}</li>
     </ul>
     <br>
 
@@ -140,24 +140,26 @@
 
 <div id="amongusmodal" class="modal" hidden>
     <div class="modal-content">
-        <span><h4>Which one is the imposter?</h4></span><span><img /></span>
+        <span><h4>Which one is the imposter?</h4></span>
+        <span><img src={{imgFileName}} class="au"/></span>
         <table>
             <tr>
-                <td><img /></td>
-                <td><img /></td>
-                <td><img /></td>
-                <td><img /></td>
+                <td><img class="au flier" id="redboi" (click)="imposterOrNah('redboi')" src="../../assets/TheBois/RedBoi.png"/></td>
+                <td><img class="au" id="orangeboi" (click)="imposterOrNah('orangeboi')" src="../../assets/TheBois/OrangeBoi.png"/></td>
+                <td><img class="au" id="yellowboi" (click)="imposterOrNah('yellowboi')" src="../../assets/TheBois/YellowBoi.png"/></td>
+                <td><img class="au" id="greenboi" (click)="imposterOrNah('greenboi')" src="../../assets/TheBois/GreenBoi.png"/></td>
             </tr>
             <tr>
-                <td><img /></td>
-                <td><img /></td>
-                <td><img /></td>
-                <td><img /></td>
+                <td><img class="au" id="limeboi" (click)="imposterOrNah('limeboi')" src="../../assets/TheBois/LimeBoi.png"/></td>
+                <td><img class="au" id="blueboi" (click)="imposterOrNah('blueboi')" src="../../assets/TheBois/BlueBoi.png"/></td>
+                <td><img class="au" id="cyanboi" (click)="imposterOrNah('cyanboi')" src="../../assets/TheBois/CyanBoi.png"/></td>
+                <td><img class="au" id="purpleboi" (click)="imposterOrNah('purpleboi')" src="../../assets/TheBois/PurpleBoi.png"/></td>
             </tr>
             <tr>
-                <td><img /></td>
-                <td><img /></td>
-                <td><img /></td>
+                <td><img class="au" id="pinkboi" (click)="imposterOrNah('pinkboi')" src="../../assets/TheBois/PinkBoi.png"/></td>
+                <td><img class="au" id="whiteboi" (click)="imposterOrNah('whiteboi')" src="../../assets/TheBois/WhiteBoi.png"/></td>
+                <td><img class="au" id="blackboi" (click)="imposterOrNah('blackboi')" src="../../assets/TheBois/BlackBoi.png"/></td>
+                <td><img class="au" id="brownboi" (click)="imposterOrNah('brownboi')" src="../../assets/TheBois/BrownBoi.png"/></td>
             </tr>
         </table>
     </div>

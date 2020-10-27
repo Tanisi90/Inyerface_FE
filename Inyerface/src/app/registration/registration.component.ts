@@ -239,6 +239,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   selectColor() {
-    
+    this.toggleModal();
+  }
+
+  toggleModal(){
+    var modal = document.getElementById("amongusmodal");
+    modal.hidden = !modal.hidden;
   }
 }

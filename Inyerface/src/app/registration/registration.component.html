@@ -33,19 +33,19 @@
     </select>
 
     <p><b> Please choose your favorite color :) </b></p>
-    <ul id = "colorPick" (click)="selectColor()">
-        <li id="color-1">{{colorList[0]}}</li>
-        <li id="color-2">{{colorList[1]}}</li>
-        <li id="color-3">{{colorList[2]}}</li>
-        <li id="color-4">{{colorList[3]}}</li>
-        <li id="color-5">{{colorList[4]}}</li>
-        <li id="color-6">{{colorList[5]}}</li>
-        <li id="color-7">{{colorList[6]}}</li>
-        <li id="color-8">{{colorList[7]}}</li>
-        <li id="color-9">{{colorList[8]}}</li>
-        <li id="color-10">{{colorList[9]}}</li>
-        <li id="color-11">{{colorList[10]}}</li>
-        <li id="color-12">{{colorList[11]}}</li>
+    <ul id = "colorPick">
+        <li id="color-1" (click)="selectColor()">{{colorList[0]}}</li>
+        <li id="color-2" (click)="selectColor()">{{colorList[1]}}</li>
+        <li id="color-3" (click)="selectColor()">{{colorList[2]}}</li>
+        <li id="color-4" (click)="selectColor()">{{colorList[3]}}</li>
+        <li id="color-5" (click)="selectColor()">{{colorList[4]}}</li>
+        <li id="color-6" (click)="selectColor()">{{colorList[5]}}</li>
+        <li id="color-7" (click)="selectColor()">{{colorList[6]}}</li>
+        <li id="color-8" (click)="selectColor()">{{colorList[7]}}</li>
+        <li id="color-9" (click)="selectColor()">{{colorList[8]}}</li>
+        <li id="color-10" (click)="selectColor()">{{colorList[9]}}</li>
+        <li id="color-11" (click)="selectColor()">{{colorList[10]}}</li>
+        <li id="color-12" (click)="selectColor()">{{colorList[11]}}</li>
     </ul>
     <br>
 
@@ -137,6 +137,35 @@
         (click)="correctReg()" style="float: right"><b> Register </b></button>
     <button outline="true" size="sm" type="button" class="btn btn-outline submitButton "
         (click)="incorrectReg()" style="float: left"><b> Register </b></button>
+
+<div id="amongusmodal" class="modal" hidden>
+    <div class="modal-content">
+        <span><h4>Which one is the imposter?</h4></span><span><img /></span>
+        <table>
+            <tr>
+                <td><img /></td>
+                <td><img /></td>
+                <td><img /></td>
+                <td><img /></td>
+            </tr>
+            <tr>
+                <td><img /></td>
+                <td><img /></td>
+                <td><img /></td>
+                <td><img /></td>
+            </tr>
+            <tr>
+                <td><img /></td>
+                <td><img /></td>
+                <td><img /></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="flier">
+    <img src="../../assets/Newt.jpg">
+</div>
 
 
 

@@ -254,7 +254,13 @@ export class RegistrationComponent implements OnInit {
   setImposter(){
     if(this.imposter != ""){
       document.getElementById("ejected").innerHTML="";
-      document.getElementById("meetingRoom").innerHTML;
+      for(var i = 0; i < 12; i++){
+        var unhide = document.getElementById(this.colorList[i] + 'boi');
+        console.log(unhide);
+        if(unhide.parentElement.hidden == true){
+          unhide.parentElement.hidden = false;
+        }
+      }
     }
     var rando = Math.floor(Math.random() * 12);
     for (var i=0; i<12; i++){

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-registration',
@@ -12,27 +13,41 @@ export class RegistrationComponent implements OnInit {
   lastLeng: number = 0;
   shiftBy: number = 3;
   securityQ = [
-    { qString: "What is your favorite Security Question?",
-      qNum: 1},
-    { qString: "Who decided to put letters in math????",
-      qNum: 2},
-    { qString: "What is your Favorite Color?",
-      qNum: 3},
-    { qString: "If there's four houses, five aliens, twelve pieces of bologne,\nand a pineapple, how many pizzas are falling from the sky?",
-      qNum: 4},
-    { qString: "What is the airspeed velocity of an unladen swallow?",
-      qNum: 5},
-    { qString: "Why is a raven like a writing desk?",
-      qNum: 6},
-    { qString: "Do you like waffles?",
-      qNum: 7},
+    {
+      qString: "What is your favorite Security Question?",
+      qNum: 1
+    },
+    {
+      qString: "Who decided to put letters in math????",
+      qNum: 2
+    },
+    {
+      qString: "What is your Favorite Color?",
+      qNum: 3
+    },
+    {
+      qString: "If there's four houses, five aliens, twelve pieces of bologne,\nand a pineapple, how many pizzas are falling from the sky?",
+      qNum: 4
+    },
+    {
+      qString: "What is the airspeed velocity of an unladen swallow?",
+      qNum: 5
+    },
+    {
+      qString: "Why is a raven like a writing desk?",
+      qNum: 6
+    },
+    {
+      qString: "Do you like waffles?",
+      qNum: 7
+    },
   ];
-  formFields: string[] = ["userField","password","confirmpassword","securityQ","email","website","domain","symbol","colorPick",
-  "numbers","numbers1","numbers2","numbers3","numbers4","numbers5","numbers6","numbers7","numbers8","numbers9",];
-  feedback: string[] = ["qAnswer","passMess"];
+  formFields: string[] = ["userField", "password", "confirmpassword", "securityQ", "email", "website", "domain", "symbol", "colorPick",
+    "numbers", "numbers1", "numbers2", "numbers3", "numbers4", "numbers5", "numbers6", "numbers7", "numbers8", "numbers9",];
+  feedback: string[] = ["qAnswer", "passMess"];
   failedPass: string[] = [];
   passValid: boolean = false;
-  colorList: string[] = ["red","orange","yellow","green","lime","cyan","blue","pink","purple","white","brown","black"];
+  colorList: string[] = ["red", "orange", "yellow", "green", "lime", "cyan", "blue", "pink", "purple", "white", "brown", "black"];
   symbol: string[] = ['a', '!', '🎃', '%', '&', '|', '🐺', ')', '%', '👁', '💌', '@', '~', ',', '>', '?', '🔑', '🗡'];
   domain: string[] = ['.aws', 'com', 'net', '.ged', '.gov', '.web', '.uwu', '.owo', '.007', '.>:)', '.edu', '.com',];
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
@@ -40,7 +55,9 @@ export class RegistrationComponent implements OnInit {
   imgFileName: string;
   imposter: string = "";
 
-  constructor(private router:Router) { }
+
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -82,30 +99,34 @@ export class RegistrationComponent implements OnInit {
   }
 
   correctReg() {
-
+    // this piece allow me to have a popup if the user email is not valid/ null
+    let fullemail = this.varifier();
+    if(fullemail == null){
+      alert("You have entered an invalid email");
+    }
   }
 
   incorrectReg() {
     this.failedPass = [];
-    for(var field of this.formFields){
+    for (var field of this.formFields) {
       var element = document.getElementById(field);
-      if(element.tagName != 'SELECT'){
+      if (element.tagName != 'SELECT') {
         (<HTMLInputElement>element).value = "";
       }
-      else{
+      else {
         (<HTMLSelectElement>element).selectedIndex = 0;
       }
     }
-    for(var message of this.feedback){
+    for (var message of this.feedback) {
       document.getElementById(message).innerHTML = "";
     }
   }
 
-  showAnswer(){
+  showAnswer() {
     var change = document.getElementById("qAnswer");
     change.innerHTML = "";
     var check = (<HTMLInputElement>document.getElementById("securityQ")).value;
-    if(check == '2'){
+    if (check == '2') {
       var drop = document.createElement("select");
       var answ1 = document.createElement("option");
       var answ2 = document.createElement("option");
@@ -129,6 +150,7 @@ export class RegistrationComponent implements OnInit {
       answ6.innerText = "Einstein";
       answ7.value = "Euripides";
       answ7.innerText = "Euripides";
+     
 
       drop.appendChild(answ1);
       drop.appendChild(answ2);
@@ -138,11 +160,13 @@ export class RegistrationComponent implements OnInit {
       drop.appendChild(answ6);
       drop.appendChild(answ7);
       change.appendChild(drop);
+
+      drop.addEventListener("change", (e:MouseEvent) => this.newtonImg());
     }
-    else if (check == '3'){
+    else if (check == '3') {
       change.innerText = "You can't choose this, it's already a question";
     }
-    else{
+    else {
       var answBox = document.createElement("input");
       answBox.id = 'answBox';
       answBox.type = 'text';
@@ -150,6 +174,19 @@ export class RegistrationComponent implements OnInit {
       change.appendChild(answBox);
     }
   }
+
+  newtonImg(){
+    console.log("hello");
+    let img = <HTMLSelectElement> document.getElementById("securityQ");
+    if(img.options[img.selectedIndex].text == "Newton"){
+      document.getElementById("Newt").hidden = true;
+    }else{
+      document.getElementById("Newt").hidden = false;
+    }
+    console.log("you");
+  }
+
+
 
   checkRules() {
     var password = (<HTMLInputElement>document.getElementById("password")).value;
@@ -171,41 +208,41 @@ export class RegistrationComponent implements OnInit {
           var phonNum = this.getPhone();
           var hasNum = false;
           console.log(phonNum);
-          for(var i=0; i < phonNum.length; i++){
-            if(password.includes(phonNum.charAt(i))){
+          for (var i = 0; i < phonNum.length; i++) {
+            if (password.includes(phonNum.charAt(i))) {
               console.log("Includes Right Num");
               hasNum = true;
               break;
             }
           }
-          if(hasNum == true){
+          if (hasNum == true) {
             var hasCol = false;
             console.log("Checking Colors");
-            for(var color of this.colorList){
+            for (var color of this.colorList) {
               console.log(color);
-              if(password.includes(color)){
+              if (password.includes(color)) {
                 console.log('passes');
                 hasCol = true;
                 break;
               }
             }
-            if(hasCol == true){
+            if (hasCol == true) {
               this.passValid = true;
             }
           }
         }
-        if(this.passValid == false) {
+        if (this.passValid == false) {
           message.innerText = "Your password is not within guidelines.";
         }
       }
     }
   }
 
-  getPhone():string{
+  getPhone(): string {
     var digits = document.getElementsByClassName("numberbox");
     console.log(digits.length);
-    var number:string[] = [];
-    for(var i = 0; i < digits.length; i++){
+    var number: string[] = [];
+    for (var i = 0; i < digits.length; i++) {
       number.push((<HTMLInputElement>digits.item(i)).value);
     }
     return number.join("");
@@ -227,6 +264,24 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  // concat the symbols together to varify valid email. 
+  varifier() {
+    if ((<HTMLInputElement>document.getElementById("symbol")).value == "@") {
+      let validator: string = "";
+      let website = ["hotmail", "gmail", "aol", "yahoo"];
+      if (website.includes((<HTMLInputElement>document.getElementById("website")).value)) {
+        if ((<HTMLInputElement>document.getElementById("domain")).value == ".com") {
+          return validator.concat((<HTMLInputElement>document.getElementById("email")).value,
+            (<HTMLInputElement>document.getElementById("symbol")).value,
+            (<HTMLInputElement>document.getElementById("website")).value,
+            (<HTMLInputElement>document.getElementById("domain")).value)
+        }
+      }
+    } 
+    return null;
+  }
+
+
   lockNum(toLock: string) {
     document.getElementById(toLock).classList.toggle("open");
   }
@@ -241,36 +296,36 @@ export class RegistrationComponent implements OnInit {
 
   selectColor(color: string) {
     this.colorSelected = color;
-    this.imgFileName = "../../assets/TheBois/"+color+"Boi.png";
+    this.imgFileName = "../../assets/TheBois/" + color + "Boi.png";
     this.toggleModal();
     this.setImposter();
   }
 
-  toggleModal(){
+  toggleModal() {
     var modal = document.getElementById("amongusmodal");
     modal.hidden = !modal.hidden;
   }
 
-  setImposter(){
-    if(this.imposter != ""){
-      document.getElementById("ejected").innerHTML="";
-      for(var i = 0; i < 12; i++){
+  setImposter() {
+    if (this.imposter != "") {
+      document.getElementById("ejected").innerHTML = "";
+      for (var i = 0; i < 12; i++) {
         var unhide = document.getElementById(this.colorList[i] + 'boi');
         console.log(unhide);
-        if(unhide.parentElement.hidden == true){
+        if (unhide.parentElement.hidden == true) {
           unhide.parentElement.hidden = false;
         }
       }
     }
     var rando = Math.floor(Math.random() * 12);
-    for (var i=0; i<12; i++){
-      if (i==rando){
-        this.imposter=this.colorList[i]+"boi";
+    for (var i = 0; i < 12; i++) {
+      if (i == rando) {
+        this.imposter = this.colorList[i] + "boi";
       }
     }
   }
 
-  imposterOrNah(chosen: string){
+  imposterOrNah(chosen: string) {
     var check = document.getElementById(chosen);
     var ejected = document.getElementById("ejected");
     var makeFly = document.createElement("span");

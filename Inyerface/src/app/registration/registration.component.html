@@ -1,10 +1,12 @@
 <div style="text-align: center;" id="box">
+    <br><br>
+    <!-- Username and password-->
+    <input type="password" (focusout)="matchPass()" id="confirmpassword" placeholder="Password Confirmation">
     <p><b> Please enter your desired Username </b></p>
     <input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
     <br>
     <p><b> Please enter your desired Password </b></p>
     <input type="password" (focusout)="checkRules()" id="password" placeholder="Password"> <br>
-    <input type="password" (focusout)="matchPass()" id="confirmpassword" placeholder="Password Confirmation">
     <div id="passMess"></div>
     <p><b>
             1) Must include 3 random symbols through out password that are not consecutive. <br>
@@ -13,13 +15,15 @@
             4) The name of a selectable color must be included in the password.
         </b>
     </p>
+
+    <!-- Security questions-->
     <label for="securityQ"><b>Please Choose your security Question:</b></label>
     <select id="securityQ" name="securityQ" (input)="showAnswer()">
         <option *ngFor="let response of securityQ" [value]="response.qNum"> {{response.qString}} </option>
     </select>
     <div id = "qAnswer"></div>
 
-
+    <!-- E-mail-->
     <p><b> Please Enter a valid E-mail</b></p>
     <input type="text" id="email" placeholder="Email">
     <select id="symbol" name="symbol">
@@ -32,6 +36,7 @@
         <option *ngFor="let res of domain" [value]="res"> {{res}} </option>
     </select>
 
+    <!-- favorite color list-->
     <p><b> Please choose your favorite color :) </b></p>
     <ul id = "colorPick">
         <li id="color-1" name="color" (click)="selectColor('Red')">{{colorList[0]}}</li>
@@ -48,7 +53,7 @@
         <li id="color-12" name="color" (click)="selectColor('Black')">{{colorList[11]}}</li>
     </ul>
     <br>
-
+    <!-- phone number boxes with hold buttons -->
     <div id="phoneboxes">
         <p><b> Please enter your phone number. </b></p>
         <table>
@@ -133,11 +138,12 @@
 
     </div>
 
+    <!-- submit buttons -->
     <button outline="true" size="sm" type="button" class="btn btn-outline submitButton"
         (click)="correctReg()" style="float: right"><b> Register </b></button>
     <button outline="true" size="sm" type="button" class="btn btn-outline submitButton "
         (click)="incorrectReg()" style="float: left"><b> Register </b></button>
-
+    <!-- Fav color modal -->
 <div id="amongusmodal" class="modal" hidden>
     <div class="modal-content">
         <span><h4>Which one is the imposter?</h4></span>
@@ -168,9 +174,9 @@
 </div>
 <div id = "ejected"></div>
 
-<!-- <div class="flier">
+<div id= "Newt" class="flier" hidden>
     <img src="../../assets/Newt.jpg">
-</div> -->
+</div>
 
 
 

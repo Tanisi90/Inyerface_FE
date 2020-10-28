@@ -141,10 +141,11 @@
 <div id="amongusmodal" class="modal" hidden>
     <div class="modal-content">
         <span><h4>Which one is the imposter?</h4></span>
-        <span><img src={{imgFileName}} class="au"/></span>
-        <table>
+        <b>You are: </b><span><img src={{imgFileName}} class="miniAU"/></span>
+        <table id = "meetingRoom">
+            <tbody>
             <tr>
-                <td><img class="au flier" id="redboi" (click)="imposterOrNah('redboi')" src="../../assets/TheBois/RedBoi.png"/></td>
+                <td><img class="au" id="redboi" (click)="imposterOrNah('redboi')" src="../../assets/TheBois/RedBoi.png"/></td>
                 <td><img class="au" id="orangeboi" (click)="imposterOrNah('orangeboi')" src="../../assets/TheBois/OrangeBoi.png"/></td>
                 <td><img class="au" id="yellowboi" (click)="imposterOrNah('yellowboi')" src="../../assets/TheBois/YellowBoi.png"/></td>
                 <td><img class="au" id="greenboi" (click)="imposterOrNah('greenboi')" src="../../assets/TheBois/GreenBoi.png"/></td>
@@ -161,13 +162,15 @@
                 <td><img class="au" id="blackboi" (click)="imposterOrNah('blackboi')" src="../../assets/TheBois/BlackBoi.png"/></td>
                 <td><img class="au" id="brownboi" (click)="imposterOrNah('brownboi')" src="../../assets/TheBois/BrownBoi.png"/></td>
             </tr>
+        </tbody>
         </table>
     </div>
 </div>
+<div id = "ejected"></div>
 
-<div class="flier">
+<!-- <div class="flier">
     <img src="../../assets/Newt.jpg">
-</div>
+</div> -->
 
 
 

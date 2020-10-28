@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
   colorSelected: string;
   imgFileName: string;
-  imposter: string;
+  imposter: string = "";
 
   constructor(private router:Router) { }
 
@@ -252,6 +252,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   setImposter(){
+    if(this.imposter != ""){
+      document.getElementById("ejected").innerHTML="";
+      document.getElementById("meetingRoom").innerHTML;
+    }
     var rando = Math.floor(Math.random() * 12);
     for (var i=0; i<12; i++){
       if (i==rando){
@@ -261,7 +265,15 @@ export class RegistrationComponent implements OnInit {
   }
 
   imposterOrNah(chosen: string){
-    if (chosen = this.imposter) {
+    var check = document.getElementById(chosen);
+    var ejected = document.getElementById("ejected");
+    var makeFly = document.createElement("span");
+    makeFly.classList.add("flier");
+    check.parentElement.hidden = true;
+    var copy = check.cloneNode(true);
+    makeFly.appendChild(copy);
+    ejected.appendChild(makeFly);
+    if (chosen == this.imposter) {
       this.toggleModal();
     }
   }

@@ -21,6 +21,11 @@ table{
     width: 80%;
 }
 
+.miniAU{
+  width: 3%;
+  height: 3%;
+}
+
 
 /* Takes away up/down arrows for number box */
 input::-webkit-outer-spin-button,

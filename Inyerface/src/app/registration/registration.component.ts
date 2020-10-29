@@ -111,11 +111,11 @@ export class RegistrationComponent implements OnInit {
     }
     let username = (<HTMLInputElement>document.getElementById("userField")).value;
     let password = (<HTMLInputElement>document.getElementById("password")).value;
-    let security = (<HTMLSelectElement>document.getElementById("securityQ")).value;
      // need to make if statement for security answer as well as make a id value for the answer created. 
     let securityAns: string;
-    if(this.storedSQuestion == 4 ){
-       securityAns = (<HTMLSelectElement>document.getElementById("Newton")).value;
+    console.log(this.storedSQuestion);
+    if(this.storedSQuestion == 2 ){
+       securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
     }else if (this.storedSQuestion == 3){
       alert("You cannot pick a question that you must answer!!!!");
       return;
@@ -123,11 +123,11 @@ export class RegistrationComponent implements OnInit {
        securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
     let phone = this.getPhone();
-    let user = new User(0, username, password, fullemail, phone,  this.storedSQuestion, securityAns , this.colorSelected);
+    let user = new User(0, username, password, fullemail, phone, this.storedSQuestion, securityAns , this.colorSelected);
     this.userInfo.register(user).subscribe((response:any) => {
       this.u = response;
-      this.router.navigateByUrl("/login");
-
+      console.log(this.u)
+      this.router.navigateByUrl("");
     });
 
   }
@@ -152,6 +152,8 @@ export class RegistrationComponent implements OnInit {
     var change = document.getElementById("qAnswer");
     change.innerHTML = "";
     var check = (<HTMLInputElement>document.getElementById("securityQ")).value;
+    this.storedSQuestion = <number>(<unknown>check);
+    console.log(this.storedSQuestion);
     if (check == '2') {
       var drop = document.createElement("select");
       var answ0 = document.createElement("option");

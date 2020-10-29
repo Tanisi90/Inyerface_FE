@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { DriverProvider } from 'protractor/built/driverProviders';
 import { stringify } from 'querystring';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -26,7 +29,7 @@ export class RegistrationComponent implements OnInit {
       qNum: 3
     },
     {
-      qString: "If there's four houses, five aliens, twelve pieces of bologne,\nand a pineapple, how many pizzas are falling from the sky?",
+      qString: "If there's four houses, five aliens, twelve pieces of bologne,\n and a pineapple, how many pizzas are falling from the sky?",
       qNum: 4
     },
     {
@@ -54,10 +57,10 @@ export class RegistrationComponent implements OnInit {
   colorSelected: string;
   imgFileName: string;
   imposter: string = "";
+  u: User;
+  
 
-
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userInfo: UserService) { }
 
   ngOnInit(): void {
   }
@@ -104,6 +107,19 @@ export class RegistrationComponent implements OnInit {
     if(fullemail == null){
       alert("You have entered an invalid email");
     }
+    let user = new User(username, password, fullemail, phone,  security, securityAns , this.colorSelected);
+    let username = (<HTMLInputElement>document.getElementById("userField")).value;
+    let password = (<HTMLInputElement>document.getElementById("password")).value;
+    let security = (<HTMLSelectElement>document.getElementById("securityQ")).value;
+    let securityAns = <HTMLInputElement>document.getElementById("...")).value; // need to make if statement for security answer as well as make a id value for the answer created. 
+    let phone = this.getPhone();
+    
+    this.userInfo.register(user).subscribe((response:any) => {
+      this.u = response;
+      this.router.navigateByUrl("/login");
+
+    });
+
   }
 
   incorrectReg() {
@@ -128,6 +144,7 @@ export class RegistrationComponent implements OnInit {
     var check = (<HTMLInputElement>document.getElementById("securityQ")).value;
     if (check == '2') {
       var drop = document.createElement("select");
+      var answ0 = document.createElement("option");
       var answ1 = document.createElement("option");
       var answ2 = document.createElement("option");
       var answ3 = document.createElement("option");
@@ -151,7 +168,8 @@ export class RegistrationComponent implements OnInit {
       answ7.value = "Euripides";
       answ7.innerText = "Euripides";
      
-
+      drop.id = 'aSelections';
+      drop.appendChild(answ0);
       drop.appendChild(answ1);
       drop.appendChild(answ2);
       drop.appendChild(answ3);
@@ -176,14 +194,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   newtonImg(){
-    console.log("hello");
-    let img = <HTMLSelectElement> document.getElementById("securityQ");
-    if(img.options[img.selectedIndex].text == "Newton"){
+    //var answ4 = document.createElement("option");
+    let img = <HTMLSelectElement> document.getElementById("aSelections");
+    if(img.options[img.selectedIndex].innerText == "Newton"){
       document.getElementById("Newt").hidden = true;
+      console.log("yo what?")
     }else{
       document.getElementById("Newt").hidden = false;
+      console.log("well yeah now you should work!")
+      console.log(img.options[img.selectedIndex].innerText);
     }
-    console.log("you");
   }
 
 

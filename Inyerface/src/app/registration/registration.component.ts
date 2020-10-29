@@ -58,6 +58,7 @@ export class RegistrationComponent implements OnInit {
   imgFileName: string;
   imposter: string = "";
   u: User;
+  storedSQuestion: number;
   
 
   constructor(private router: Router, private userInfo: UserService) { }
@@ -106,14 +107,23 @@ export class RegistrationComponent implements OnInit {
     let fullemail = this.varifier();
     if(fullemail == null){
       alert("You have entered an invalid email");
+      return;
     }
-    let user = new User(username, password, fullemail, phone,  security, securityAns , this.colorSelected);
     let username = (<HTMLInputElement>document.getElementById("userField")).value;
     let password = (<HTMLInputElement>document.getElementById("password")).value;
     let security = (<HTMLSelectElement>document.getElementById("securityQ")).value;
-    let securityAns = <HTMLInputElement>document.getElementById("...")).value; // need to make if statement for security answer as well as make a id value for the answer created. 
+     // need to make if statement for security answer as well as make a id value for the answer created. 
+    let securityAns: string;
+    if(this.storedSQuestion == 4 ){
+       securityAns = (<HTMLSelectElement>document.getElementById("Newton")).value;
+    }else if (this.storedSQuestion == 3){
+      alert("You cannot pick a question that you must answer!!!!");
+      return;
+    }else{
+       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
+    }
     let phone = this.getPhone();
-    
+    let user = new User(0, username, password, fullemail, phone,  this.storedSQuestion, securityAns , this.colorSelected);
     this.userInfo.register(user).subscribe((response:any) => {
       this.u = response;
       this.router.navigateByUrl("/login");

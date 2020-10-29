@@ -10,7 +10,7 @@ export class User {
     secAnsw:string;
     favColor:string;
 
-    public User(userId:number,username:string,password:string,email:string,
+   constructor(userId:number,username:string,password:string,email:string,
         phoneNum:string,secQuest:number,secAnsw:string,favColor:string,){
         this.userId = userId;
         this.username = username;

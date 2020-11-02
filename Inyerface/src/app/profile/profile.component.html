@@ -11,6 +11,7 @@
 </div>
 <div id = "passwordmodal" class = "modal" hidden>
     <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.password}}</b></p>
         <input type="password" (focusout)="matchPass()" id="confirmpassword" placeholder="Password Confirmation">
         <p><b> Please enter your desired Password </b></p>
         <input type="password" (focusout)="checkRules()" id="password" placeholder="Password"> <br>
@@ -27,6 +28,7 @@
 </div>
 <div id = "securitymodal" class = "modal" hidden>
     <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.secQuest}}, {{lgdUser.user.secAnsw}}</b></p>
         <label for="securityQ"><b>Please Choose your security Question:</b></label>
         <select id="securityQ" name="securityQ" (input)="showAnswer()">
         <option *ngFor="let response of securityQ" [value]="response.qNum"> {{response.qString}} </option>
@@ -37,6 +39,7 @@
 </div>
 <div id = "emailmodal" class = "modal" hidden>
     <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.email}}</b></p>
         <p><b> Please Enter a valid E-mail</b></p>
         <input type="text" id="email" placeholder="Email">
         <select id="symbol" name="symbol">
@@ -53,6 +56,7 @@
 </div>
 <div id = "phonemodal" class = "modal" hidden>
     <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.phoneNum}}</b></p>
         <div id="phoneboxes">
             <p><b> Please enter your phone number. </b></p>
             <table>
@@ -140,6 +144,7 @@
 </div>
 <div id = "colormodal" class = "modal" hidden>
     <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.favColor}}</b></p>
         <p>Color currently picked:</p>
         <p>{{color}}</p>
         <button (click)="getRandomColor()">Generate</button>

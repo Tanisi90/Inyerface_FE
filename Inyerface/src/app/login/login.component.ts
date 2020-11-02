@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { LoggedUser } from '../models/logged-user';
+import { LoggedUser } from 'src/app/models/logged-user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
   login1:number = 1;
@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
 
       this.userServ.login(username,password).subscribe(
         (response:any)=>{
-          this.lgdUser = response;
-          console.log(this.lgdUser);
+          this.lgdUser.user = response;
           this.router.navigateByUrl('/profile');
         }
       );

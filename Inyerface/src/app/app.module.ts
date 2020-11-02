@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoggedUser } from './models/logged-user';
+
+import { LoggedUser } from 'src/app/models/logged-user';
 
 
 @NgModule({

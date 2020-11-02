@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { LoggedUser } from '../models/logged-user';
+import { LoggedUser } from 'src/app/models/logged-user';
 import { User } from '../models/user';
 
 @Component({
@@ -67,14 +67,14 @@ export class ProfileComponent implements OnInit {
   symbol: string[] = ['a', '!', '🎃', '%', '&', '|', '🐺', ')', '%', '👁', '💌', '@', '~', ',', '>', '?', '🔑', '🗡'];
   domain: string[] = ['.aws', 'com', 'net', '.ged', '.gov', '.web', '.uwu', '.owo', '.007', '.>:)', '.edu', '.com',];
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
-  color: string = "blue";
+  color: string;
   u: User;
   storedSQuestion: number;
 
   constructor(private userServ:UserService, private router:Router, public lgdUser:LoggedUser) { }
 
   ngOnInit(): void {
-    console.log(this.lgdUser);
+    console.log(this.lgdUser.user);
     this.createBlankMaze();
     this.paint();
     this.checkpoints();

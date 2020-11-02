@@ -392,6 +392,8 @@ export class RegistrationComponent implements OnInit {
     if (this.imposter != "") {
       var reg = /Dead/;
       var bois = document.getElementsByClassName("au");
+      var mini = document.getElementById("mini");
+      mini.parentElement.hidden = false;
       for (var i = 0; i < 12; i++) {
         var revive = <HTMLImageElement>bois.item(i);
         if (reg.test(revive.src)) {

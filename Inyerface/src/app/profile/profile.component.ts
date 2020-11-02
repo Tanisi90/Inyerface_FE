@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ];
   // isolated;
 
-  constructor() { }
+  constructor(private userServ:UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.createBlankMaze();
@@ -56,17 +58,16 @@ export class ProfileComponent implements OnInit {
       }
 
       if (this.rowPosition == this.mazeHeight && this.colPosition == this.mazeWidth){
-        alert("!!!!");
+        this.update();
       }
       for(var id of this.pointIds){
         if(id.pos.row == this.rowPosition && id.pos.col == this.colPosition){
-          alert("Put Modal Here");
+          this.toggleModal(id.name);
         }
       }
     }
 
   }
-
 
   createBlankMaze() {
 
@@ -166,7 +167,6 @@ export class ProfileComponent implements OnInit {
     var tryAgain = false;
     for(var id of this.pointIds){
       var newest:{row:number,col:number} = {row:0,col:0};
-      console.log(id);
       do{
         tryAgain = false;
         newest.row = Math.floor(Math.random() * this.mazeHeight)+1;
@@ -175,7 +175,6 @@ export class ProfileComponent implements OnInit {
           tryAgain = true;
         }
       }while(tryAgain)
-      console.log(newest);
       taken.push(newest);
       var hold = document.getElementById("cell_" + newest.row + "_" + newest.col);
       hold.style.backgroundColor = id.color;
@@ -380,8 +379,16 @@ export class ProfileComponent implements OnInit {
 
   //CONTROL SECTION//
   movePos(direction) {
-
-    this.currentCell.style.backgroundColor = "rgb(0,0,0)";
+    var checkpoint = false;
+    for(var id of this.pointIds){
+      if(id.pos.row == this.rowPosition && id.pos.col == this.colPosition){
+        this.currentCell.style.backgroundColor = id.color;
+        checkpoint = true;
+      }
+    }
+    if(checkpoint == false){
+      this.currentCell.style.backgroundColor = "rgb(0,0,0)";
+    }
 
     switch (direction) {
 
@@ -427,5 +434,24 @@ export class ProfileComponent implements OnInit {
 
     this.currentCell = document.getElementById("cell_" + this.rowPosition + "_" + this.colPosition);
     this.currentCell.style.backgroundColor = "rgb(255, 145, 0)";
+  }
+
+  //MODAL STUFF
+
+  toggleModal(name:string){
+    alert("Put Modal Here!");
+    // var modal = document.getElementById(name);
+    // modal.hidden = !modal.hidden;
+  }
+
+  update(){
+    alert("Finished");
+    // this.userServ.update(this.lgdUser.user).subscribe(
+    //   (response:any)=>{
+    //     this.lgdUser.user = response;
+    //     alert("Account Updated!");
+    //   }
+    // );
+
   }
 }

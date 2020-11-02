@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class LoginComponent implements OnInit {
   login1:number = 1;
@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
   submit(){
     var username = (<HTMLInputElement>document.getElementById("userField")).value;
     var password = (<HTMLInputElement>document.getElementById("passField")).value;
-    var mess = document.getElementById("messages");
 
       this.userServ.login(username,password).subscribe(
         (response:any)=>{
+          console.log(response);
           this.router.navigateByUrl('/profile');
         }
       );

@@ -18,6 +18,10 @@ export class RegistrationComponent implements OnInit {
   shiftBy: number = 3;
   securityQ = [
     {
+      qString: "Pick a security question",
+      qNum: 0
+    },
+    {
       qString: "What is your favorite Security Question?",
       qNum: 1
     },

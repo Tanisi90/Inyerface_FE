@@ -30,6 +30,10 @@ export class ProfileComponent implements OnInit {
   shiftBy: number = 3;
   securityQ = [
     {
+      qString: "Pick a security question",
+      qNum: 0
+    },
+    {
       qString: "What is your favorite Security Question?",
       qNum: 1
     },
@@ -493,6 +497,45 @@ export class ProfileComponent implements OnInit {
 
   update(){
     alert("Finished");
+    // this piece allow me to have a popup if the user email is not valid/ null
+    let fullemail = this.varifier();
+    if(fullemail == null){
+      alert("You have entered an invalid email");
+      return;
+    }
+    let username = (<HTMLInputElement>document.getElementById("userField")).value;
+    let password = (<HTMLInputElement>document.getElementById("password")).value;
+     // need to make if statement for security answer as well as make a id value for the answer created. 
+    let securityAns: string;
+    console.log(this.storedSQuestion);
+    if(this.storedSQuestion == 2 ){
+       securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
+    }else if (this.storedSQuestion == 3){
+      alert("You cannot pick a question that you must answer!!!!");
+      return;
+    }else{
+       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
+    }
+    let phone = this.getPhone();
+    
+    if (fullemail != ''){
+      this.lgdUser.user.email = fullemail;
+    }
+    if (username != ''){
+      this.lgdUser.user.username = username;
+    }
+    if (password != ''){
+      this.lgdUser.user.password = password;
+    }
+    if (this.storedSQuestion != 0){
+      this.lgdUser.user.secQuest = this.storedSQuestion;
+    }
+    if (securityAns != ''){
+      this.lgdUser.user.secAnsw = securityAns;
+    }
+    if (phone != ''){
+      this.lgdUser.user.phoneNum = phone;
+    }
     
     this.userServ.update(this.lgdUser.user).subscribe(
       (response:any)=>{

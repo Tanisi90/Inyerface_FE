@@ -61,7 +61,8 @@ export class RegistrationComponent implements OnInit {
   alive: number = 12;
   u: User;
   storedSQuestion: number;
-  
+  gameon = false;
+
 
   constructor(private router: Router, private userInfo: UserService) { }
 
@@ -107,26 +108,26 @@ export class RegistrationComponent implements OnInit {
   correctReg() {
     // this piece allow me to have a popup if the user email is not valid/ null
     let fullemail = this.varifier();
-    if(fullemail == null){
+    if (fullemail == null) {
       alert("You have entered an invalid email");
       return;
     }
     let username = (<HTMLInputElement>document.getElementById("userField")).value;
     let password = (<HTMLInputElement>document.getElementById("password")).value;
-     // need to make if statement for security answer as well as make a id value for the answer created. 
+    // need to make if statement for security answer as well as make a id value for the answer created. 
     let securityAns: string;
     console.log(this.storedSQuestion);
-    if(this.storedSQuestion == 2 ){
-       securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
-    }else if (this.storedSQuestion == 3){
+    if (this.storedSQuestion == 2) {
+      securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
+    } else if (this.storedSQuestion == 3) {
       alert("You cannot pick a question that you must answer!!!!");
       return;
-    }else{
-       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
+    } else {
+      securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
     let phone = this.getPhone();
-    let user = new User(0, username, password, fullemail, phone, this.storedSQuestion, securityAns , this.colorSelected);
-    this.userInfo.register(user).subscribe((response:any) => {
+    let user = new User(0, username, password, fullemail, phone, this.storedSQuestion, securityAns, this.colorSelected);
+    this.userInfo.register(user).subscribe((response: any) => {
       this.u = response;
       console.log(this.u)
       this.router.navigateByUrl("");
@@ -181,7 +182,7 @@ export class RegistrationComponent implements OnInit {
       answ6.innerText = "Einstein";
       answ7.value = "Euripides";
       answ7.innerText = "Euripides";
-     
+
       drop.id = 'aSelections';
       drop.appendChild(answ0);
       drop.appendChild(answ1);
@@ -193,7 +194,7 @@ export class RegistrationComponent implements OnInit {
       drop.appendChild(answ7);
       change.appendChild(drop);
 
-      drop.addEventListener("change", (e:MouseEvent) => this.newtonImg());
+      drop.addEventListener("change", (e: MouseEvent) => this.newtonImg());
     }
     else if (check == '3') {
       change.innerText = "You can't choose this, it's already a question";
@@ -207,13 +208,13 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  newtonImg(){
+  newtonImg() {
     //var answ4 = document.createElement("option");
-    let img = <HTMLSelectElement> document.getElementById("aSelections");
-    if(img.options[img.selectedIndex].innerText == "Newton"){
+    let img = <HTMLSelectElement>document.getElementById("aSelections");
+    if (img.options[img.selectedIndex].innerText == "Newton") {
       document.getElementById("Newt").hidden = true;
       console.log("yo what?")
-    }else{
+    } else {
       document.getElementById("Newt").hidden = false;
       console.log("well yeah now you should work!")
       console.log(img.options[img.selectedIndex].innerText);
@@ -311,7 +312,7 @@ export class RegistrationComponent implements OnInit {
             (<HTMLInputElement>document.getElementById("domain")).value)
         }
       }
-    } 
+    }
     return null;
   }
 
@@ -334,42 +335,66 @@ export class RegistrationComponent implements OnInit {
     this.toggleModal();
     this.setImposter();
 
-    const source = timer(2000, 2000);
+    const source = timer(10000, 10000);
     const abc = source.subscribe(val => {
-      this.killCM();
-      this.alive--;
-      if(this.alive == 2){
-        this.colorSelected = "";
-        this.toggleModal();
-        var reg = /Dead/;
-        var bois = document.getElementsByClassName("au");
-        for(var i = 0; i < 12; i++){
-          if(reg.test(bois.item(i).innerHTML)){
-            bois.item(i).innerHTML.replace("Dead","Boi");
+      if(this.gameon == false){
+        abc.unsubscribe()
+      }else{
+        this.killCM();
+        this.alive--;
+        if (this.alive == 2) {
+          if(this.imposter == (this.colorSelected + "boi")){
+            this.toggleModal();
+            alert("You Won! You were the imposter! (how could you have done this?)");
+          }else{
+            this.colorSelected = "";
+            this.toggleModal();
           }
+          abc.unsubscribe();
         }
-        this.alive = 12;
-        this.imposter = "";
       }
     });
   }
 
-  killCM(){
-    // var rando = Math.floor(Math.random() * 12);
-    // for (var i = 0; i < 12; i++) {
-    //   if (i == rando && (this.colorList[i] + "boi") != this.imposter) {
-    //     this.imposter = this.colorList[i] + "boi";
-    //   }
-    // }
+  killCM() {
+    var dead = false;
+    var reg = /Dead/;
+    do {
+      let rando = Math.floor(Math.random() * 12);
+        if(this.colorList[rando] == this.colorSelected){
+          this.toggleModal();
+          alert("You Died, Try Again!");
+          return;
+        }
+        var id = this.colorList[rando] + "boi";
+        if (id != this.imposter) {
+          var body = <HTMLImageElement>document.getElementById(id)
+          console.log(body.src);
+          if (body.parentElement.hidden == false && reg.test(body.src) == false) {
+            body.src = body.src.replace("Boi.png","Dead.png");
+            dead = true;
+          }
+        }
+    } while (dead == false)
   }
 
   toggleModal() {
     var modal = document.getElementById("amongusmodal");
     modal.hidden = !modal.hidden;
+    this.gameon = !modal.hidden;
   }
 
   setImposter() {
     if (this.imposter != "") {
+      var reg = /Dead/;
+      var bois = document.getElementsByClassName("au");
+      for (var i = 0; i < 12; i++) {
+        var revive = <HTMLImageElement>bois.item(i);
+        if (reg.test(revive.src)) {
+          revive.src = revive.src.replace("Dead.png", "Boi.png");
+        }
+      }
+      this.alive = 12;
       document.getElementById("ejected").innerHTML = "";
       for (var i = 0; i < 12; i++) {
         var unhide = document.getElementById(this.colorList[i] + 'boi');
@@ -380,11 +405,8 @@ export class RegistrationComponent implements OnInit {
       }
     }
     var rando = Math.floor(Math.random() * 12);
-    for (var i = 0; i < 12; i++) {
-      if (i == rando) {
-        this.imposter = this.colorList[i] + "boi";
-      }
-    }
+    this.imposter = this.colorList[rando] + "boi";
+    console.log(this.imposter);
   }
 
   imposterOrNah(chosen: string) {
@@ -397,8 +419,10 @@ export class RegistrationComponent implements OnInit {
     makeFly.appendChild(copy);
     ejected.appendChild(makeFly);
     if (chosen == this.imposter) {
-      this.imposter = "";
       this.toggleModal();
+      if((<HTMLImageElement>check).src == this.imgFileName){
+        alert("You Were the Imposter! You lose, try again!");
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { DriverProvider } from 'protractor/built/driverProviders';
 import { stringify } from 'querystring';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -57,6 +58,7 @@ export class RegistrationComponent implements OnInit {
   colorSelected: string;
   imgFileName: string;
   imposter: string = "";
+  alive: number = 12;
   u: User;
   storedSQuestion: number;
   
@@ -331,6 +333,34 @@ export class RegistrationComponent implements OnInit {
     this.imgFileName = "../../assets/TheBois/" + color + "Boi.png";
     this.toggleModal();
     this.setImposter();
+
+    const source = timer(2000, 2000);
+    const abc = source.subscribe(val => {
+      this.killCM();
+      this.alive--;
+      if(this.alive == 2){
+        this.colorSelected = "";
+        this.toggleModal();
+        var reg = /Dead/;
+        var bois = document.getElementsByClassName("au");
+        for(var i = 0; i < 12; i++){
+          if(reg.test(bois.item(i).innerHTML)){
+            bois.item(i).innerHTML.replace("Dead","Boi");
+          }
+        }
+        this.alive = 12;
+        this.imposter = "";
+      }
+    });
+  }
+
+  killCM(){
+    // var rando = Math.floor(Math.random() * 12);
+    // for (var i = 0; i < 12; i++) {
+    //   if (i == rando && (this.colorList[i] + "boi") != this.imposter) {
+    //     this.imposter = this.colorList[i] + "boi";
+    //   }
+    // }
   }
 
   toggleModal() {
@@ -367,6 +397,7 @@ export class RegistrationComponent implements OnInit {
     makeFly.appendChild(copy);
     ejected.appendChild(makeFly);
     if (chosen == this.imposter) {
+      this.imposter = "";
       this.toggleModal();
     }
   }

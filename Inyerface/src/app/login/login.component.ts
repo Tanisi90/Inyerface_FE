@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { LoggedUser } from '../models/logged-user';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   login2:number = 1;
   login3:number = 1;
 
-  constructor(private userServ:UserService,private router:Router) { }
+  constructor(private userServ:UserService,private router:Router, public lgdUser:LoggedUser) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
 
       this.userServ.login(username,password).subscribe(
         (response:any)=>{
-          console.log(response);
+          this.lgdUser = response;
+          console.log(this.lgdUser);
           this.router.navigateByUrl('/profile');
         }
       );

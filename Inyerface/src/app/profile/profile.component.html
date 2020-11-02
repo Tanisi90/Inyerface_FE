@@ -1,2 +1,148 @@
 <div id = "maze_container">
 </div>
+<div id = "usernamemodal" class = "modal">
+    <div class = "modal-content">
+        <p><b>What you currently have: {{lgdUser.user.username}}</b></p>
+        <p><b> Please enter your desired Username </b></p>
+        <input type="text" id="userField" (input)="cipher()" placeholder="Username(coded)">
+        <br>
+        <button (click) = "toggleModal('username')">Exit</button>
+    </div>
+</div>
+<div id = "passwordmodal" class = "modal" hidden>
+    <div class = "modal-content">
+        <input type="password" (focusout)="matchPass()" id="confirmpassword" placeholder="Password Confirmation">
+        <p><b> Please enter your desired Password </b></p>
+        <input type="password" (focusout)="checkRules()" id="password" placeholder="Password"> <br>
+        <div id="passMess"></div>
+        <p><b>
+            1) Must include 3 random symbols through out password that are not consecutive. <br>
+            2) Must include a number from your phone number. <br>
+            3) Must include minimal of 1 capital letter.<br>
+            4) The name of a selectable color must be included in the password.
+        </b>
+        </p>
+        <button (click) = "toggleModal('password')">Exit</button>
+    </div>
+</div>
+<div id = "securitymodal" class = "modal" hidden>
+    <div class = "modal-content">
+        <label for="securityQ"><b>Please Choose your security Question:</b></label>
+        <select id="securityQ" name="securityQ" (input)="showAnswer()">
+        <option *ngFor="let response of securityQ" [value]="response.qNum"> {{response.qString}} </option>
+        </select>
+        <div id = "qAnswer"></div>
+        <button (click) = "toggleModal('security')">Exit</button>
+    </div>
+</div>
+<div id = "emailmodal" class = "modal" hidden>
+    <div class = "modal-content">
+        <p><b> Please Enter a valid E-mail</b></p>
+        <input type="text" id="email" placeholder="Email">
+        <select id="symbol" name="symbol">
+        <option *ngFor="let type of symbol" [value]="type">{{type}}</option>
+        </select>
+        <select id="website" name="website">
+        <option *ngFor="let site of website" [value]="site"> {{site}} </option>
+        </select>
+        <select id="domain" name="domain">
+        <option *ngFor="let res of domain" [value]="res"> {{res}} </option>
+        </select>
+        <button (click) = "toggleModal('email')">Exit</button>
+    </div>
+</div>
+<div id = "phonemodal" class = "modal" hidden>
+    <div class = "modal-content">
+        <div id="phoneboxes">
+            <p><b> Please enter your phone number. </b></p>
+            <table>
+                <tr >
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers1" min="0" max="9"/>
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers2" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers3" min="0" max="9"  />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers4" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open"  type="number" id="numbers5" min="0" max="9"  />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers6" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers7" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers8" min="0" max="9" />
+                    </td>
+                    <td>
+                        <input class = "numberbox open" type="number" id="numbers9" min="0" max="9" />
+                    </td>
+    
+                </tr>
+                <tr>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers1')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers2')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers3')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers4')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers5')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers6')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers7')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers8')"> H
+                        </button>
+                    </td>
+                    <td>
+                        <button class = "rngbutton" (click)="lockNum('numbers9')"> H
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <button id="generate" outline="true" size="sm" type="button"
+            (click)="getRandomNumber()" style="float: center"> Generate </button>
+            <button (click) = "toggleModal('phone')">Exit</button>
+        </div>
+    </div>
+</div>
+<div id = "colormodal" class = "modal" hidden>
+    <div class = "modal-content">
+        <p>Color currently picked:</p>
+        <p>{{color}}</p>
+        <button (click)="getRandomColor()">Generate</button>
+        <button (click) = "toggleModal('color')">Exit</button>
+    </div>
+</div>

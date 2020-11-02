@@ -415,6 +415,7 @@ export class RegistrationComponent implements OnInit {
 
   imposterOrNah(chosen: string) {
     var check = document.getElementById(chosen);
+    var you = <HTMLImageElement>document.getElementById("mini");
     var ejected = document.getElementById("ejected");
     var makeFly = document.createElement("span");
     makeFly.classList.add("flier");
@@ -422,10 +423,27 @@ export class RegistrationComponent implements OnInit {
     var copy = check.cloneNode(true);
     makeFly.appendChild(copy);
     ejected.appendChild(makeFly);
+    if((<HTMLImageElement>check).src == you.src){
+      you.parentElement.hidden = true;
+      var minCop = you.cloneNode(true);
+      var ejected = document.getElementById("ejected");
+      var minFly = document.createElement("span");
+      minFly.classList.add("flier");
+      minFly.appendChild(minCop);
+      var time = timer(2000,2000);
+      var wait = time.subscribe(val =>{
+        ejected.appendChild(minFly);
+        wait.unsubscribe();
+      })
+      this.toggleModal();
+      alert("You Were Not An Imposter :( You lose, try again!");
+    }
     if (chosen == this.imposter) {
       this.toggleModal();
-      if((<HTMLImageElement>check).src == this.imgFileName){
+      if((<HTMLImageElement>check).src == you.src){
         alert("You Were the Imposter! You lose, try again!");
+      }else{
+        alert("You found the Imposter! Congrats!");
       }
     }
   }

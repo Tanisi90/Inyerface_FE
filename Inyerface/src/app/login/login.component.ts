@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
       this.userServ.login(username,password).subscribe(
         (response:any)=>{
-          this.lgdUser.user = response;
+          localStorage.setItem("loggedUser",JSON.stringify(response));
           this.router.navigateByUrl('/profile');
         }
       );

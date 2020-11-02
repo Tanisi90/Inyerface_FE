@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { LoggedUser } from 'src/app/models/logged-user';
 import { User } from '../models/user';
 
 @Component({
@@ -17,13 +16,13 @@ export class ProfileComponent implements OnInit {
   rowPosition = 1;
   colPosition = 1;
   currentCell;
-  pointIds:{name:string,color:string,pos:{row:number,col:number}}[] = [
-    {name: "username", color:"rgb(0, 38, 255)", pos:{row:0,col:0}},
-    {name:"password",color:"rgb(115, 20, 153)",pos:{row:0,col:0}},
-    {name:"security",color:"rgb(191, 11, 11)",pos:{row:0,col:0}},
-    {name:"email",color:"rgb(216, 66, 227)",pos:{row:0,col:0}},
-    {name:"phone",color:"rgb(5, 232, 103)",pos:{row:0,col:0}},
-    {name:"color",color:"rgb(234, 255, 0)",pos:{row:0,col:0}}
+  pointIds: { name: string, color: string, pos: { row: number, col: number } }[] = [
+    { name: "username", color: "rgb(0, 38, 255)", pos: { row: 0, col: 0 } },
+    { name: "password", color: "rgb(115, 20, 153)", pos: { row: 0, col: 0 } },
+    { name: "security", color: "rgb(191, 11, 11)", pos: { row: 0, col: 0 } },
+    { name: "email", color: "rgb(216, 66, 227)", pos: { row: 0, col: 0 } },
+    { name: "phone", color: "rgb(5, 232, 103)", pos: { row: 0, col: 0 } },
+    { name: "color", color: "rgb(234, 255, 0)", pos: { row: 0, col: 0 } }
   ];
   // isolated;
   lastLeng: number = 0;
@@ -72,22 +71,19 @@ export class ProfileComponent implements OnInit {
   domain: string[] = ['.aws', 'com', 'net', '.ged', '.gov', '.web', '.uwu', '.owo', '.007', '.>:)', '.edu', '.com',];
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
   color: string;
-  u: User;
+  lgdUser: User = null;
   storedSQuestion: number;
 
-  constructor(private userServ:UserService, private router:Router, public lgdUser:LoggedUser) { }
+  constructor(private userServ: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.lgdUser.user);
+    this.lgdUser = JSON.parse(localStorage.getItem("loggedUser"));
+    if (this.lgdUser == null) {
+      this.router.navigateByUrl("");
+    }
     this.createBlankMaze();
     this.paint();
     this.checkpoints();
-    // this.isolated = (document.getElementsByClassName("unoccupied")).length;
-    // if(this.isolated > 0){
-    //   console.log("Has Things");
-    //   this.findUO();
-    // }
-    // console.log(this.isolated);
     document.onkeydown = (event) => {
       switch (event.keyCode) {
         case 37:
@@ -108,11 +104,11 @@ export class ProfileComponent implements OnInit {
           break;
       }
 
-      if (this.rowPosition == this.mazeHeight && this.colPosition == this.mazeWidth){
+      if (this.rowPosition == this.mazeHeight && this.colPosition == this.mazeWidth) {
         this.update();
       }
-      for(var id of this.pointIds){
-        if(id.pos.row == this.rowPosition && id.pos.col == this.colPosition){
+      for (var id of this.pointIds) {
+        if (id.pos.row == this.rowPosition && id.pos.col == this.colPosition) {
           this.toggleModal(id.name);
         }
       }
@@ -210,22 +206,22 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  checkpoints(){
-    var taken:{row:number,col:number}[] = [
-      {row:1,col:1},
-      {row:this.mazeHeight,col:this.mazeWidth}
+  checkpoints() {
+    var taken: { row: number, col: number }[] = [
+      { row: 1, col: 1 },
+      { row: this.mazeHeight, col: this.mazeWidth }
     ]
     var tryAgain = false;
-    for(var id of this.pointIds){
-      var newest:{row:number,col:number} = {row:0,col:0};
-      do{
+    for (var id of this.pointIds) {
+      var newest: { row: number, col: number } = { row: 0, col: 0 };
+      do {
         tryAgain = false;
-        newest.row = Math.floor(Math.random() * this.mazeHeight)+1;
-        newest.col = Math.floor(Math.random() * this.mazeWidth)+1;
-        if(taken.includes(newest)){
+        newest.row = Math.floor(Math.random() * this.mazeHeight) + 1;
+        newest.col = Math.floor(Math.random() * this.mazeWidth) + 1;
+        if (taken.includes(newest)) {
           tryAgain = true;
         }
-      }while(tryAgain)
+      } while (tryAgain)
       taken.push(newest);
       var hold = document.getElementById("cell_" + newest.row + "_" + newest.col);
       hold.style.backgroundColor = id.color;
@@ -431,13 +427,13 @@ export class ProfileComponent implements OnInit {
   //CONTROL SECTION//
   movePos(direction) {
     var checkpoint = false;
-    for(var id of this.pointIds){
-      if(id.pos.row == this.rowPosition && id.pos.col == this.colPosition){
+    for (var id of this.pointIds) {
+      if (id.pos.row == this.rowPosition && id.pos.col == this.colPosition) {
         this.currentCell.style.backgroundColor = id.color;
         checkpoint = true;
       }
     }
-    if(checkpoint == false){
+    if (checkpoint == false) {
       this.currentCell.style.backgroundColor = "rgb(0,0,0)";
     }
 
@@ -489,57 +485,57 @@ export class ProfileComponent implements OnInit {
 
   //MODAL STUFF
 
-  toggleModal(name:string){
+  toggleModal(name: string) {
     //alert("Put Modal Here!");
-    var modal = document.getElementById(name+"modal");
+    var modal = document.getElementById(name + "modal");
     modal.hidden = !modal.hidden;
   }
 
-  update(){
+  update() {
     alert("Finished");
-    // this piece allow me to have a popup if the user email is not valid/ null
-    let fullemail = this.varifier();
-    if(fullemail == null){
-      alert("You have entered an invalid email");
-      return;
+    // this piece allows me to have a popup if the user email is not valid/ null
+    if ((<HTMLInputElement>document.getElementById("email")).value != '') {
+      let fullemail = this.varifier();
+      if (fullemail == null) {
+        alert("You have entered an invalid email");
+        return;
+      }
+      this.lgdUser.email = fullemail;
     }
     let username = (<HTMLInputElement>document.getElementById("userField")).value;
     let password = (<HTMLInputElement>document.getElementById("password")).value;
-     // need to make if statement for security answer as well as make a id value for the answer created. 
+    // need to make if statement for security answer as well as make a id value for the answer created. 
     let securityAns: string;
     console.log(this.storedSQuestion);
-    if(this.storedSQuestion == 2 ){
-       securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
-    }else if (this.storedSQuestion == 3){
+    if (this.storedSQuestion == 2) {
+      securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
+    } else if (this.storedSQuestion == 3) {
       alert("You cannot pick a question that you must answer!!!!");
       return;
-    }else{
-       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
+    } else {
+      securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
     let phone = this.getPhone();
-    
-    if (fullemail != ''){
-      this.lgdUser.user.email = fullemail;
+
+    if (username != '') {
+      this.lgdUser.username = username;
     }
-    if (username != ''){
-      this.lgdUser.user.username = username;
+    if (password != '') {
+      this.lgdUser.password = password;
     }
-    if (password != ''){
-      this.lgdUser.user.password = password;
+    if (this.storedSQuestion != 0) {
+      this.lgdUser.secQuest = this.storedSQuestion;
     }
-    if (this.storedSQuestion != 0){
-      this.lgdUser.user.secQuest = this.storedSQuestion;
+    if (securityAns != '') {
+      this.lgdUser.secAnsw = securityAns;
     }
-    if (securityAns != ''){
-      this.lgdUser.user.secAnsw = securityAns;
+    if (phone != '') {
+      this.lgdUser.phoneNum = phone;
     }
-    if (phone != ''){
-      this.lgdUser.user.phoneNum = phone;
-    }
-    
-    this.userServ.update(this.lgdUser.user).subscribe(
-      (response:any)=>{
-        this.lgdUser.user = response;
+
+    this.userServ.update(this.lgdUser).subscribe(
+      (response: any) => {
+        this.lgdUser = response;
         alert("Account Updated!");
       }
     );
@@ -613,7 +609,7 @@ export class ProfileComponent implements OnInit {
       answ6.innerText = "Einstein";
       answ7.value = "Euripides";
       answ7.innerText = "Euripides";
-     
+
       drop.id = 'aSelections';
       drop.appendChild(answ0);
       drop.appendChild(answ1);
@@ -625,7 +621,7 @@ export class ProfileComponent implements OnInit {
       drop.appendChild(answ7);
       change.appendChild(drop);
 
-      drop.addEventListener("change", (e:MouseEvent) => this.newtonImg());
+      drop.addEventListener("change", (e: MouseEvent) => this.newtonImg());
     }
     else if (check == '3') {
       change.innerText = "You can't choose this, it's already a question";
@@ -639,13 +635,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  newtonImg(){
+  newtonImg() {
     //var answ4 = document.createElement("option");
-    let img = <HTMLSelectElement> document.getElementById("aSelections");
-    if(img.options[img.selectedIndex].innerText == "Newton"){
+    let img = <HTMLSelectElement>document.getElementById("aSelections");
+    if (img.options[img.selectedIndex].innerText == "Newton") {
       document.getElementById("Newt").hidden = true;
       console.log("yo what?")
-    }else{
+    } else {
       document.getElementById("Newt").hidden = false;
       console.log("well yeah now you should work!")
       console.log(img.options[img.selectedIndex].innerText);
@@ -741,7 +737,7 @@ export class ProfileComponent implements OnInit {
             (<HTMLInputElement>document.getElementById("domain")).value)
         }
       }
-    } 
+    }
     return null;
   }
 
@@ -767,5 +763,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl("");
+  }
 
 }

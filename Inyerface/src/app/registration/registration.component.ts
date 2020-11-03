@@ -263,7 +263,7 @@ export class RegistrationComponent implements OnInit {
             console.log("Checking Colors");
             for (var color of this.colorList) {
               console.log(color);
-              if (password.includes(color)) {
+              if (password.toLowerCase().includes(color)) {
                 console.log('passes');
                 hasCol = true;
                 break;

@@ -129,6 +129,10 @@ export class RegistrationComponent implements OnInit {
     } else {
       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
+    if(this.colorSelected == ""){
+      alert("You must select a favorite color! (Hint: Color only stores if you win.");
+      return;
+    }
     let phone = this.getPhone();
     let user = new User(0, username, password, fullemail, phone, this.storedSQuestion, securityAns, this.colorSelected);
     this.userInfo.register(user).subscribe((response: any) => {
@@ -351,6 +355,7 @@ export class RegistrationComponent implements OnInit {
             this.toggleModal();
             alert("You Won! You were the imposter! (how could you have done this?)");
           }else{
+            alert("Defeat!");
             this.colorSelected = "";
             this.toggleModal();
           }
@@ -368,6 +373,7 @@ export class RegistrationComponent implements OnInit {
         if(this.colorList[rando] == this.colorSelected){
           this.toggleModal();
           alert("You Died, Try Again!");
+          this.colorSelected = "";
           return;
         }
         var id = this.colorList[rando] + "boi";
@@ -439,11 +445,13 @@ export class RegistrationComponent implements OnInit {
       })
       this.toggleModal();
       alert("You Were Not An Imposter :( You lose, try again!");
+      this.colorSelected = "";
     }
     if (chosen == this.imposter) {
       this.toggleModal();
       if((<HTMLImageElement>check).src == you.src){
         alert("You Were the Imposter! You lose, try again!");
+        this.colorSelected = "";
       }else{
         alert("You found the Imposter! Congrats!");
       }

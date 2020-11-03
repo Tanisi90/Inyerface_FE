@@ -66,6 +66,7 @@ export class RegistrationComponent implements OnInit {
   u: User;
   storedSQuestion: number;
   gameon = false;
+  registering = false;
 
 
   constructor(private router: Router, private userInfo: UserService) { }
@@ -110,35 +111,53 @@ export class RegistrationComponent implements OnInit {
   }
 
   correctReg() {
+    console.log("ENTERS CR" + this.registering);
     // this piece allow me to have a popup if the user email is not valid/ null
+    if(this.registering == true){
+      return;
+    }
+    this.registering = true;
     let fullemail = this.varifier();
     if (fullemail == null) {
-      alert("You have entered an invalid email");
+      alert("You have entered an invalid email." +
+        "\nValid symbols: @" +
+        "\nValid websites: gmail, hotmail, yahoo, aol" +
+        "\nValid domains: .com");
+        this.registering = false;
       return;
     }
     let username = (<HTMLInputElement>document.getElementById("userField")).value;
     let password = (<HTMLInputElement>document.getElementById("password")).value;
     // need to make if statement for security answer as well as make a id value for the answer created. 
     let securityAns: string;
-    console.log(this.storedSQuestion);
     if (this.storedSQuestion == 2) {
       securityAns = (<HTMLSelectElement>document.getElementById("aSelections")).value;
+      if(securityAns != "Newton"){
+        alert("Answer Incorrect!");
+        this.registering = false;
+        return;
+      }
     } else if (this.storedSQuestion == 3) {
       alert("You cannot pick a question that you must answer!!!!");
+      this.registering = false;
       return;
     } else {
       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
-    if(this.colorSelected == ""){
+    if (this.colorSelected == "") {
       alert("You must select a favorite color! (Hint: Color only stores if you win.");
+      this.registering = false;
       return;
     }
     let phone = this.getPhone();
     let user = new User(0, username, password, fullemail, phone, this.storedSQuestion, securityAns, this.colorSelected);
     this.userInfo.register(user).subscribe((response: any) => {
-      this.u = response;
-      console.log(this.u)
+      alert("Submitted!");
+      this.registering = false;
       this.router.navigateByUrl("");
+    }, (error:any) =>{
+      alert("Submission failed :(");
+      this.registering = false;
     });
 
   }
@@ -332,7 +351,12 @@ export class RegistrationComponent implements OnInit {
   getRandomNumber() {
     var digits = document.getElementsByClassName("open");
     for (var i = 0; i < digits.length; i++) {
-      (<HTMLInputElement>digits.item(i)).value = Math.floor(Math.random() * 9).toString();
+      var num;
+      do {
+        num = Math.floor(Math.random() * 10).toString();
+      } while (num == "10")
+
+      (<HTMLInputElement>digits.item(i)).value = num;
     }
     this.getPhone();
   }
@@ -345,16 +369,16 @@ export class RegistrationComponent implements OnInit {
 
     const source = timer(5000, 5000);
     const abc = source.subscribe(val => {
-      if(this.gameon == false){
+      if (this.gameon == false) {
         abc.unsubscribe()
-      }else{
+      } else {
         this.killCM();
         this.alive--;
         if (this.alive == 2) {
-          if(this.imposter == (this.colorSelected + "boi")){
+          if (this.imposter == (this.colorSelected + "boi")) {
             this.toggleModal();
             alert("You Won! You were the imposter! (how could you have done this?)");
-          }else{
+          } else {
             alert("Defeat!");
             this.colorSelected = "";
             this.toggleModal();
@@ -370,21 +394,21 @@ export class RegistrationComponent implements OnInit {
     var reg = /Dead/;
     do {
       let rando = Math.floor(Math.random() * 12);
-        if(this.colorList[rando] == this.colorSelected){
-          this.toggleModal();
-          alert("You Died, Try Again!");
-          this.colorSelected = "";
-          return;
+      if (this.colorList[rando] == this.colorSelected) {
+        this.toggleModal();
+        alert("You Died, Try Again!");
+        this.colorSelected = "";
+        return;
+      }
+      var id = this.colorList[rando] + "boi";
+      if (id != this.imposter) {
+        var body = <HTMLImageElement>document.getElementById(id)
+        console.log(body.src);
+        if (body.parentElement.hidden == false && reg.test(body.src) == false) {
+          body.src = body.src.replace("Boi.png", "Dead.png");
+          dead = true;
         }
-        var id = this.colorList[rando] + "boi";
-        if (id != this.imposter) {
-          var body = <HTMLImageElement>document.getElementById(id)
-          console.log(body.src);
-          if (body.parentElement.hidden == false && reg.test(body.src) == false) {
-            body.src = body.src.replace("Boi.png","Dead.png");
-            dead = true;
-          }
-        }
+      }
     } while (dead == false)
   }
 
@@ -423,6 +447,12 @@ export class RegistrationComponent implements OnInit {
 
   imposterOrNah(chosen: string) {
     var check = document.getElementById(chosen);
+    var checkSrc = (<HTMLImageElement>check).src; 
+    var reg = /Dead/;
+    if(reg.test(checkSrc)){
+      alert("He's dead Jim");
+      return;
+    }
     var you = <HTMLImageElement>document.getElementById("mini");
     var ejected = document.getElementById("ejected");
     var makeFly = document.createElement("span");
@@ -431,29 +461,34 @@ export class RegistrationComponent implements OnInit {
     var copy = check.cloneNode(true);
     makeFly.appendChild(copy);
     ejected.appendChild(makeFly);
-    if((<HTMLImageElement>check).src == you.src){
+    if (checkSrc == you.src) {
       you.parentElement.hidden = true;
       var minCop = you.cloneNode(true);
       var ejected = document.getElementById("ejected");
       var minFly = document.createElement("span");
       minFly.classList.add("flier");
       minFly.appendChild(minCop);
-      var time = timer(2000,2000);
-      var wait = time.subscribe(val =>{
+      var time = timer(2000, 2000);
+      var wait = time.subscribe(val => {
         ejected.appendChild(minFly);
         wait.unsubscribe();
       })
-      this.toggleModal();
-      alert("You Were Not An Imposter :( You lose, try again!");
-      this.colorSelected = "";
     }
     if (chosen == this.imposter) {
       this.toggleModal();
-      if((<HTMLImageElement>check).src == you.src){
+      if (checkSrc == you.src) {
         alert("You Were the Imposter! You lose, try again!");
         this.colorSelected = "";
-      }else{
+      } else {
         alert("You found the Imposter! Congrats!");
+      }
+    }else{
+      if(checkSrc == you.src){
+        this.toggleModal();
+        alert("You Were Not An Imposter :( You lose, try again!");
+        this.colorSelected = "";
+      }else{
+        alert("They were Not An Imposter. 1 Imposter remaining.");
       }
     }
   }

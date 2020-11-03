@@ -9,6 +9,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { LoggedUser } from 'src/app/models/logged-user';
+import { VideoComponent } from './video/video.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { LoggedUser } from 'src/app/models/logged-user';
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,

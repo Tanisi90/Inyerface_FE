@@ -1,0 +1,10 @@
+body{
+    background: black;
+}
+
+.center{
+  margin-top: 23%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

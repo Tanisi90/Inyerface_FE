@@ -339,7 +339,7 @@ export class RegistrationComponent implements OnInit {
     this.toggleModal();
     this.setImposter();
 
-    const source = timer(10000, 10000);
+    const source = timer(5000, 5000);
     const abc = source.subscribe(val => {
       if(this.gameon == false){
         abc.unsubscribe()

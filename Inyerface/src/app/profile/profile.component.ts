@@ -73,6 +73,8 @@ export class ProfileComponent implements OnInit {
   color: string;
   lgdUser: User = null;
   storedSQuestion: number;
+  checkModal: boolean = true;
+
 
   constructor(private userServ: UserService, private router: Router) { }
 
@@ -84,36 +86,7 @@ export class ProfileComponent implements OnInit {
     this.createBlankMaze();
     this.paint();
     this.checkpoints();
-    document.onkeydown = (event) => {
-      switch (event.keyCode) {
-        case 37:
-        case 65:
-          this.movePos("left");
-          break;
-        case 38:
-        case 87:
-          this.movePos("top");
-          break;
-        case 39:
-        case 68:
-          this.movePos("right");
-          break;
-        case 40:
-        case 83:
-          this.movePos("bottom");
-          break;
-      }
-
-      if (this.rowPosition == this.mazeHeight && this.colPosition == this.mazeWidth) {
-        this.update();
-      }
-      for (var id of this.pointIds) {
-        if (id.pos.row == this.rowPosition && id.pos.col == this.colPosition) {
-          this.toggleModal(id.name);
-        }
-      }
-    }
-
+    this.modalEvents();
   }
 
   createBlankMaze() {
@@ -489,6 +462,7 @@ export class ProfileComponent implements OnInit {
     //alert("Put Modal Here!");
     var modal = document.getElementById(name + "modal");
     modal.hidden = !modal.hidden;
+    this.checkModal = modal.hidden;
   }
 
   update() {
@@ -532,11 +506,15 @@ export class ProfileComponent implements OnInit {
     if (phone != '') {
       this.lgdUser.phoneNum = phone;
     }
+    if (this.color != undefined) {
+      this.lgdUser.favColor = this.color;
+    }
 
     this.userServ.update(this.lgdUser).subscribe(
       (response: any) => {
         this.lgdUser = response;
         alert("Account Updated!");
+        this.router.navigateByUrl("congrats");
       }
     );
 
@@ -768,4 +746,40 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl("");
   }
 
+  modalEvents() {
+    document.onkeydown = (event) => {
+      if(this.checkModal == false){
+        return;
+      }
+      switch (event.keyCode) {
+        case 37:
+        case 65:
+          this.movePos("left");
+          break;
+        case 38:
+        case 87:
+          this.movePos("top");
+          break;
+        case 39:
+        case 68:
+          this.movePos("right");
+          break;
+        case 40:
+        case 83:
+          this.movePos("bottom");
+          break;
+      }
+
+      if (this.rowPosition == this.mazeHeight && this.colPosition == this.mazeWidth) {
+        this.update();
+      }
+      for (var id of this.pointIds) {
+        if (id.pos.row == this.rowPosition && id.pos.col == this.colPosition) {
+          this.toggleModal(id.name);
+        }
+      }
+    }
+  }
 }
+
+

@@ -500,7 +500,7 @@ export class ProfileComponent implements OnInit {
     if (this.storedSQuestion != 0) {
       this.lgdUser.secQuest = this.storedSQuestion;
     }
-    if (securityAns != '') {
+    if (securityAns != null) {
       this.lgdUser.secAnsw = securityAns;
     }
     if (phone != '') {
@@ -514,10 +514,12 @@ export class ProfileComponent implements OnInit {
       (response: any) => {
         this.lgdUser = response;
         alert("Account Updated!");
-        this.router.navigateByUrl("congrats");
+        this.router.navigateByUrl("/congrats");
+      },
+      (error: any) => {
+        this.router.navigateByUrl("/congrats");
       }
     );
-
   }
 
   cipher(): void {

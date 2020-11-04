@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
   website: string[] = ['hotmess', 'hotseat', 'hotchoc', 'hotmail', 'horseman', 'gangrene', 'gmale', 'gman', 'geyser', 'grimlock', 'gmail', 'yoohoo', 'yahoo', 'awol', 'aol'];
   color: string;
   lgdUser: User = null;
-  storedSQuestion: number;
+  storedSQuestion: number = 0;
   checkModal: boolean = true;
 
 
@@ -467,6 +467,7 @@ export class ProfileComponent implements OnInit {
 
   update() {
     alert("Finished");
+    var changed = false;
     // this piece allows me to have a popup if the user email is not valid/ null
     if ((<HTMLInputElement>document.getElementById("email")).value != '') {
       let fullemail = this.varifier();
@@ -486,40 +487,55 @@ export class ProfileComponent implements OnInit {
     } else if (this.storedSQuestion == 3) {
       alert("You cannot pick a question that you must answer!!!!");
       return;
+    } else if (this.storedSQuestion == 0){
+      securityAns = null;
     } else {
       securityAns = (<HTMLInputElement>document.getElementById("answBox")).value;
     }
     let phone = this.getPhone();
 
-    if (username != '') {
+    if (username != '' && username != this.lgdUser.username) {
       this.lgdUser.username = username;
+      changed = true;
+      console.log(username);
     }
     if (password != '') {
       this.lgdUser.password = password;
+      changed = true;
+      console.log(password);
     }
     if (this.storedSQuestion != 0) {
       this.lgdUser.secQuest = this.storedSQuestion;
+      changed = true;
+      console.log(this.storedSQuestion)
     }
     if (securityAns != null) {
       this.lgdUser.secAnsw = securityAns;
+      changed = true;
+      console.log(securityAns);
     }
     if (phone != '') {
       this.lgdUser.phoneNum = phone;
+      changed = true;
+      console.log(phone);
     }
     if (this.color != undefined) {
       this.lgdUser.favColor = this.color;
+      changed = true;
+      console.log(this.color);
     }
-
+    
+    if (changed == true){
     this.userServ.update(this.lgdUser).subscribe(
       (response: any) => {
         this.lgdUser = response;
         alert("Account Updated!");
         this.router.navigateByUrl("/congrats");
-      },
-      (error: any) => {
-        this.router.navigateByUrl("/congrats");
       }
     );
+    } else {
+      this.router.navigateByUrl("/congrats");
+    }
   }
 
   cipher(): void {

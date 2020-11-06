@@ -526,6 +526,7 @@ export class ProfileComponent implements OnInit {
     }
     
     if (changed == true){
+      localStorage.setItem("completed","true");
     this.userServ.update(this.lgdUser).subscribe(
       (response: any) => {
         this.lgdUser = response;
@@ -579,7 +580,6 @@ export class ProfileComponent implements OnInit {
     change.innerHTML = "";
     var check = (<HTMLInputElement>document.getElementById("securityQ")).value;
     this.storedSQuestion = <number>(<unknown>check);
-    console.log(this.storedSQuestion);
     if (check == '2') {
       var drop = document.createElement("select");
       var answ0 = document.createElement("option");
@@ -636,10 +636,8 @@ export class ProfileComponent implements OnInit {
     let img = <HTMLSelectElement>document.getElementById("aSelections");
     if (img.options[img.selectedIndex].innerText == "Newton") {
       document.getElementById("Newt").hidden = true;
-      console.log("yo what?")
     } else {
       document.getElementById("Newt").hidden = false;
-      console.log("well yeah now you should work!")
       console.log(img.options[img.selectedIndex].innerText);
     }
   }
@@ -662,8 +660,10 @@ export class ProfileComponent implements OnInit {
         console.log(check2);
         if (check1 != null && check2 != null) {
           var phonNum = this.getPhone();
+          if(phonNum.length != 10){
+            phonNum = this.lgdUser.phoneNum;
+          }
           var hasNum = false;
-          console.log(phonNum);
           for (var i = 0; i < phonNum.length; i++) {
             if (password.includes(phonNum.charAt(i))) {
               console.log("Includes Right Num");
@@ -673,10 +673,8 @@ export class ProfileComponent implements OnInit {
           }
           if (hasNum == true) {
             var hasCol = false;
-            console.log("Checking Colors");
             for (var color of this.colorList) {
-              console.log(color);
-              if (password.includes(color)) {
+              if (password.toLowerCase().includes(color)) {
                 console.log('passes');
                 hasCol = true;
                 break;
@@ -696,7 +694,6 @@ export class ProfileComponent implements OnInit {
 
   getPhone(): string {
     var digits = document.getElementsByClassName("numberbox");
-    console.log(digits.length);
     var number: string[] = [];
     for (var i = 0; i < digits.length; i++) {
       number.push((<HTMLInputElement>digits.item(i)).value);

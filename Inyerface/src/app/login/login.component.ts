@@ -10,37 +10,39 @@ import { LoggedUser } from 'src/app/models/logged-user';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
-  login1:number = 1;
-  login2:number = 1;
-  login3:number = 1;
+  login1: number = 1;
+  login2: number = 1;
+  login3: number = 1;
 
-  constructor(private userServ:UserService,private router:Router, public lgdUser:LoggedUser) { }
+  constructor(private userServ: UserService, private router: Router, public lgdUser: LoggedUser) { }
 
   ngOnInit(): void {
   }
 
-  submit(){
+  submit() {
     var username = (<HTMLInputElement>document.getElementById("userField")).value;
     var password = (<HTMLInputElement>document.getElementById("passField")).value;
 
-      this.userServ.login(username,password).subscribe(
-        (response:any)=>{
-          localStorage.setItem("loggedUser",JSON.stringify(response));
-          this.router.navigateByUrl('/profile');
-        }
-      );
-    this.toggleModal();
+    this.userServ.login(username, password).subscribe(
+      (response: any) => {
+        localStorage.setItem("loggedUser", JSON.stringify(response));
+        this.router.navigateByUrl('/profile');
+      },
+      error => {
+        this.toggleModal();
+      }
+    );
   }
 
-  loginCount(lock:number,lockId:string){
+  loginCount(lock: number, lockId: string) {
     console.log(lock);
     var mess = document.getElementById("messages");
     mess.innerText = "";
-    if(lock == 7){
+    if (lock == 7) {
       document.getElementById(lockId).hidden = true;
       mess.innerText = "Old tricks won't open new doors!"
-    }else{
-      switch(lockId){
+    } else {
+      switch (lockId) {
         case 'login1':
           this.login1++;
           break;
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  toggleModal(){
+  toggleModal() {
     var modal = document.getElementById("diabolicalmodal");
     modal.hidden = !modal.hidden;
   }

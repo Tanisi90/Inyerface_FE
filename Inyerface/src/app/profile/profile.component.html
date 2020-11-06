@@ -1,7 +1,11 @@
+
+<div class="buttonHolder">
+    <button (click) = "logout()">Logout</button>
+    <!-- <button (click) = "update()">Debug :(</button> -->
+</div>
 <div id = "maze_container">
 </div>
-<div><button (click) = "logout()">Logout</button></div>
-<div id = "usernamemodal" class = "modal">
+<div id = "usernamemodal" class = "modal" hidden>
     <div class = "modal-content">
         <p><b>What you currently have: {{lgdUser.username}}</b></p>
         <p><b> Please enter your desired Username </b></p>

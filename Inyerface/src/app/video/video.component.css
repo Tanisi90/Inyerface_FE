@@ -8,3 +8,15 @@ body{
   margin-right: auto;
   display: block;
 }
+
+.buttonSpot{
+  text-align:center;
+}
+
+.spoopy{
+  margin-left: 25px;
+  margin-right: 25px;
+  background-color: rgb(255, 123, 0);
+  font-size: 20px;
+  padding: 10px;
+}

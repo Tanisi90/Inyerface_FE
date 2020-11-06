@@ -530,11 +530,11 @@ export class ProfileComponent implements OnInit {
       (response: any) => {
         this.lgdUser = response;
         alert("Account Updated!");
-        this.router.navigateByUrl("/congrats");
+        this.router.navigateByUrl("congrats");
       }
     );
     } else {
-      this.router.navigateByUrl("/congrats");
+      this.router.navigateByUrl("congrats");
     }
   }
 
